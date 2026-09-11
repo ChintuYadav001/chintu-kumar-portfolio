@@ -1,0 +1,96 @@
+/* ==========================================================================
+   3D PERSPECTIVE, TILT PHYSICS & SPECULAR LIGHTING
+   Module: tilt3d.css
+   Hardware-accelerated 3D transforms, cursor-following specular glare,
+   and layered perspective depth.
+   ========================================================================== */
+
+/* Perspective root wrapper */
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow var(--transition-normal);
+}
+
+/* Dynamic Specular Glare Overlay */
+.tilt-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.tilt-glare-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 65%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+/* 3D Depth Layering on Card Contents */
+.tilt-layer-floating {
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+}
+
+.tilt-layer-deep {
+  transform: translateZ(42px);
+  transform-style: preserve-3d;
+}
+
+/* Isometric Floating 3D Accent Badges */
+.floating-3d-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(19, 26, 43, 0.85);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2);
+  backdrop-filter: blur(16px);
+  transform: perspective(600px) rotateX(10deg) rotateY(-12deg) translateZ(20px);
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms ease;
+}
+
+.floating-3d-badge:hover {
+  transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(35px) scale(1.05);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.35);
+}
+
+/* 3D Glow Border Accent */
+.glow-border-3d {
+  position: relative;
+}
+
+.glow-border-3d::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(129, 140, 248, 0.1), rgba(52, 211, 153, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity var(--transition-normal);
+}
+
+.glow-border-3d:hover::before {
+  opacity: 1;
+}

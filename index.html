@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chintu Kumar - Aspiring Data Analyst Portfolio, Verified Certifications & Interactive ATS Resume. Python, SQL, Power BI, Excel, EDA & Machine Learning.">
+  <title>Chintu Kumar | Aspiring Data Analyst</title>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Master Stylesheet (Aggregates all modular CSS files) -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Full-Screen Ambient 3D Particle Constellation Background -->
+  <canvas id="bg-3d-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="glow-orb glow-orb-1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-2" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       HEADER & NAVIGATION BAR
+       ====================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand" aria-label="Chintu Kumar Portfolio Home">
+        <div class="brand-icon">CK</div>
+        <div class="brand-title">
+          <span>Chintu Kumar</span>
+          <span>&lt;DataAnalyst/&gt;</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#certificates" class="nav-link">Certificates</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action buttons -->
+      <div class="header-actions">
+        <!-- Theme Switcher Button -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark/light theme" title="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-toggle-btn" class="mobile-toggle-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#certificates" class="nav-link">Certificates</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         HERO SECTION WITH 3D TILT & ANALYTICS VISUALS
+         ==================================================================== -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left: Text & CTAs -->
+          <div class="hero-content reveal">
+            <div class="hero-status-badge">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span id="hero-status-text">Available for Data Analyst Roles</span>
+            </div>
+
+            <h1 class="hero-title">
+              Hi, I'm <span id="hero-name" class="gradient-text">Chintu Kumar</span>
+            </h1>
+
+            <div class="hero-typewriter-container">
+              <span>I am an&nbsp;</span>
+              <span id="typewriter-text" class="gradient-text-alt">Aspiring Data Analyst</span>
+              <span class="typed-cursor" aria-hidden="true">|</span>
+            </div>
+
+            <p id="hero-bio" class="hero-description">
+              B.Tech Computer Science (AI & DS) student with a strong foundation in Python, SQL, Excel, and Power BI. Skilled in data cleaning, exploratory data analysis, and dashboard development.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#projects" class="btn btn-primary">
+                <span>View Analytics Projects</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+              <a href="#certificates" class="btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                <span>Verified Credentials</span>
+              </a>
+              <button class="btn btn-outline trigger-resume-modal" title="View interactive resume in fullscreen viewer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                <span>View Resume</span>
+              </button>
+            </div>
+
+            <div class="hero-socials dynamic-socials">
+              <!-- Injected by JavaScript main.js -->
+            </div>
+          </div>
+
+          <!-- Right: Interactive 3D WebGL Cyber Data Core Stage -->
+          <div class="hero-visual reveal reveal-delay-2">
+            <div class="floating-3d-tag">
+              <span class="pulse-dot" style="background-color: var(--accent-cyan);"></span>
+              <span>Interactive 3D WebGL</span>
+            </div>
+
+            <div class="hero-3d-container glow-border-3d" id="hero-3d-stage">
+              <!-- 3D Header HUD Bar -->
+              <div class="hero-3d-hud-header">
+                <div class="hero-3d-status">
+                  <span class="pulse-dot"></span>
+                  <span>3D Cyber Data Core</span>
+                </div>
+                <div class="hero-3d-tag">Python • SQL • Power BI</div>
+              </div>
+
+              <!-- 3D Canvas Viewport -->
+              <div class="hero-3d-canvas-wrapper" title="Click and drag to rotate the 3D core in real-time">
+                <canvas id="hero-3d-canvas"></canvas>
+                <div class="hero-3d-hint">Drag to rotate in 3D</div>
+
+                <!-- 3D Interactive Controls -->
+                <div class="hero-3d-controls">
+                  <button id="btn-3d-rotate" class="hero-3d-btn active" title="Toggle Auto-Spin">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span>Auto-Spin: ON</span>
+                  </button>
+                  <button id="btn-3d-wireframe" class="hero-3d-btn" title="Toggle Wireframe Mode">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <span>Wireframe</span>
+                  </button>
+                  <button id="btn-3d-pulse" class="hero-3d-btn" title="Send Data Energy Pulse">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Pulse</span>
+                  </button>
+                  <button id="btn-3d-reset" class="hero-3d-btn" title="Reset 3D Orientation">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span>Reset</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Live Telemetry KPI Metrics -->
+              <div class="hero-3d-kpis">
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">100+</div>
+                  <div class="hero-3d-kpi-lbl">SQL Queries</div>
+                </div>
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">10K+</div>
+                  <div class="hero-3d-kpi-lbl">Rows Analyzed</div>
+                </div>
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">50K+</div>
+                  <div class="hero-3d-kpi-lbl">Raw Data Cleaned</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-sub-kpi-badge floating-3d-badge">
+              <span class="pulse-dot" style="background-color: var(--accent-violet);"></span>
+              <span>EDA • RFM • DAX • Python Pipelines</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ABOUT SECTION WITH 3D VISUALS & RESUME ACTION WIDGET
+         ==================================================================== -->
+    <!-- ====================================================================
+         ABOUT SECTION - UNBOXED, VISUAL DATA ARCHITECTURE
+         ==================================================================== -->
+    <!-- ====================================================================
+         ABOUT SECTION - STREAMLINED & STRUCTURED
+         ==================================================================== -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Profile Overview</span>
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">Bridging raw data, statistical analysis, and executive decision-making.</p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Left Column: Biography & Fast Facts -->
+          <div class="about-bio-col reveal">
+            <div class="about-bio-card glow-border-3d" data-tilt data-tilt-max="5" data-tilt-scale="1.01">
+              <h3 class="about-bio-heading">Analytical Thinker &amp; Problem Solver</h3>
+              
+              <p id="about-bio" class="about-bio-text">
+                B.Tech Computer Science (AI &amp; Data Science) undergraduate at <strong>IIMT Engineering College</strong> with hands-on internship experience at <strong>Alfido Tech</strong>. Specialized in Python, SQL pipeline construction, exploratory data analysis (EDA), and interactive Power BI dashboard development. Passionate about automating data workflows, engineering RFM customer models, and translating complex datasets into clear, actionable business strategies.
+              </p>
+
+              <!-- Quick Info Badges Grid -->
+              <div class="about-facts-grid">
+                <div class="about-fact-item">
+                  <span class="fact-icon">🎓</span>
+                  <div class="fact-text">
+                    <span class="fact-label">Degree</span>
+                    <strong class="fact-val">B.Tech CSE (AI &amp; DS)</strong>
+                  </div>
+                </div>
+                <div class="about-fact-item">
+                  <span class="fact-icon">💼</span>
+                  <div class="fact-text">
+                    <span class="fact-label">Experience</span>
+                    <strong class="fact-val">Data Analyst Intern</strong>
+                  </div>
+                </div>
+                <div class="about-fact-item">
+                  <span class="fact-icon">📍</span>
+                  <div class="fact-text">
+                    <span class="fact-label">Location</span>
+                    <strong class="fact-val">Greater Noida / Delhi NCR</strong>
+                  </div>
+                </div>
+                <div class="about-fact-item">
+                  <span class="fact-icon">🚀</span>
+                  <div class="fact-text">
+                    <span class="fact-label">Availability</span>
+                    <strong class="fact-val">Open for Roles / Remote</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resume Action Buttons -->
+              <div class="about-actions-row">
+                <button class="btn btn-primary btn-sm trigger-resume-modal" title="View interactive ATS resume in fullscreen modal">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+                  <span>Interactive Resume</span>
+                </button>
+                <a href="assets/Chintu_Kumar_Data_Analyst_Resume.pdf" download="Chintu_Kumar_Data_Analyst_Resume.pdf" class="btn btn-outline btn-sm" title="Download official PDF resume">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  <span>Download PDF</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: 4 Analytical Focus Pillars -->
+          <div class="about-pillars-col reveal reveal-delay-2">
+            <div class="about-pillars-grid">
+              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
+                <div class="pillar-icon-wrap" style="color: var(--accent-cyan);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <div>
+                  <h4 class="pillar-title">Data Cleaning &amp; Wrangling</h4>
+                  <p class="pillar-desc">Cleaning 50,000+ raw rows using Pandas &amp; NumPy, resolving null values, outliers, and automating ETL tasks.</p>
+                </div>
+              </div>
+
+              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
+                <div class="pillar-icon-wrap" style="color: var(--accent-emerald);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div>
+                  <h4 class="pillar-title">Exploratory Analysis (EDA)</h4>
+                  <p class="pillar-desc">Engineering RFM segmentation, customer lifetime metrics, and detecting high-value business trends.</p>
+                </div>
+              </div>
+
+              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
+                <div class="pillar-icon-wrap" style="color: var(--accent-violet);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                </div>
+                <div>
+                  <h4 class="pillar-title">Power BI &amp; DAX Dashboards</h4>
+                  <p class="pillar-desc">Architecting interactive multi-page dashboards, KPI scorecards, and DAX calculations (CALCULATE, SUMX, RANKX).</p>
+                </div>
+              </div>
+
+              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
+                <div class="pillar-icon-wrap" style="color: #f59e0b;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <div>
+                  <h4 class="pillar-title">SQL Querying &amp; Optimization</h4>
+                  <p class="pillar-desc">Writing complex SQL queries with CTEs, window functions, and multi-table joins (100+ complex SQL queries solved).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrated Key Metrics Strip -->
+        <div id="stats-container" class="about-stats-strip reveal">
+          <!-- Injected by JavaScript statsCounter.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         EXPERIENCE & EDUCATION TIMELINE
+         ==================================================================== -->
+    <section id="experience" class="timeline">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Career &amp; Education</span>
+          <h2 class="section-title">Experience &amp; Academic Background</h2>
+          <p class="section-subtitle">Hands-on internships, dataset preprocessing pipelines, and continuous academic growth in AI &amp; Data Science.</p>
+        </div>
+
+        <div class="timeline-tabs reveal">
+          <button class="timeline-tab-btn active" data-tab="experience">Work Experience</button>
+          <button class="timeline-tab-btn" data-tab="education">Education &amp; Degrees</button>
+        </div>
+
+        <div id="timeline-items-container" class="timeline-container">
+          <!-- Injected by JavaScript timeline.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SKILLS SECTION
+         ==================================================================== -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Technical Competencies</span>
+          <h2 class="section-title">Skills &amp; Technologies</h2>
+          <p class="section-subtitle">Core programming languages, data manipulation packages, and business intelligence suites.</p>
+        </div>
+
+        <div class="skills-filter-group reveal">
+          <button class="skills-filter-btn active" data-category="all">All Skills</button>
+          <button class="skills-filter-btn" data-category="frontend">Python &amp; SQL</button>
+          <button class="skills-filter-btn" data-category="backend">BI &amp; Visualization</button>
+          <button class="skills-filter-btn" data-category="devops">Databases &amp; ETL</button>
+          <button class="skills-filter-btn" data-category="tools">Analytics &amp; Tools</button>
+        </div>
+
+        <div id="skills-grid" class="skills-grid">
+          <!-- Injected by JavaScript skills.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PROJECTS SHOWCASE SECTION
+         ==================================================================== -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Portfolio Work</span>
+          <h2 class="section-title">End-to-End Analytics Projects</h2>
+          <p class="section-subtitle">Real-world business datasets analyzed using Python, SQL, Power BI, and statistical segmentation models.</p>
+        </div>
+
+        <div class="projects-filter-group reveal">
+          <button class="projects-filter-btn active" data-category="all">All Projects</button>
+          <button class="projects-filter-btn" data-category="fullstack">Python / Analytics</button>
+          <button class="projects-filter-btn" data-category="frontend">SQL &amp; Power BI</button>
+          <button class="projects-filter-btn" data-category="ai">EDA &amp; Funnels</button>
+        </div>
+
+        <div id="projects-grid" class="projects-grid">
+          <!-- Injected by JavaScript projects.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CERTIFICATIONS & ACHIEVEMENTS GALLERY
+         ==================================================================== -->
+    <section id="certificates" class="certificates">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Credentials</span>
+          <h2 class="section-title">Certifications &amp; Achievements</h2>
+          <p class="section-subtitle">Verified professional credentials with official certificate IDs, QR verification, and accredited achievements.</p>
+        </div>
+
+        <!-- Certificate Category Filter Pills -->
+        <div class="cert-filter-group reveal">
+          <button class="cert-filter-btn active" data-category="all">All Credentials</button>
+          <button class="cert-filter-btn" data-category="ai">AI &amp; Machine Learning</button>
+          <button class="cert-filter-btn" data-category="analytics">Analytics &amp; BI</button>
+          <button class="cert-filter-btn" data-category="sql">SQL &amp; Databases</button>
+          <button class="cert-filter-btn" data-category="python">Python &amp; Data Science</button>
+          <button class="cert-filter-btn" data-category="iot">IoT &amp; Engineering</button>
+        </div>
+
+        <div id="certificates-grid" class="certificates-grid">
+          <!-- Injected by JavaScript certificates.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CONTACT SECTION
+         ==================================================================== -->
+    <section id="contact" class="contact contact-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Connect</span>
+          <h2 class="section-title">Let's Discuss Data &amp; Opportunities</h2>
+          <p class="section-subtitle">Looking for an enthusiastic Data Analyst ready to contribute immediately? Feel free to call, email, or message me!</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Cards -->
+          <div class="contact-info-cards reveal">
+            <!-- Email card -->
+            <div id="copy-email-card" class="contact-card" role="button" tabindex="0" title="Click to copy email address">
+              <div class="contact-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <div class="contact-card-title">Email Address (Click to Copy)</div>
+                <div id="contact-email-value" class="contact-card-value">chintukumaredu00@gmail.com</div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Instant Chat Card -->
+            <a id="whatsapp-direct-card" href="https://wa.me/917763917713?text=Hi%20Chintu%2C%20I%20saw%20your%20data%20analytics%20portfolio%20and%20would%20like%20to%20connect%21" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp-card" title="Click to chat directly on WhatsApp">
+              <div class="contact-card-icon whatsapp-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M16.5 14.5c-.3.8-1.5 1.5-2.2 1.5-1.6 0-3.6-1.5-4.8-2.7s-2.7-3.2-2.7-4.8c0-.7.7-1.9 1.5-2.2.3-.1.7 0 .9.3l1.1 1.7c.2.3.1.7-.1.9l-.6.6c.6 1.1 1.5 2 2.6 2.6l.6-.6c.2-.2.6-.3.9-.1l1.7 1.1c.3.2.4.6.3.9z"/></svg>
+              </div>
+              <div>
+                <div class="contact-card-title">WhatsApp (Instant Chat &amp; Call)</div>
+                <div id="contact-whatsapp-value" class="contact-card-value">+91 7763917713</div>
+                <span class="whatsapp-status-badge">⚡ Instant Reply &bull; Online</span>
+              </div>
+            </a>
+
+            <!-- Phone card -->
+            <div id="copy-phone-card" class="contact-card" role="button" tabindex="0" title="Click to copy phone number">
+              <div class="contact-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-card-title">Direct Phone (Click to Copy)</div>
+                <div id="contact-phone-value" class="contact-card-value">+91 7763917713</div>
+              </div>
+            </div>
+
+            <!-- Location card -->
+            <div class="contact-card">
+              <div class="contact-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-card-title">Location</div>
+                <div id="contact-location-value" class="contact-card-value">Greater Noida / Delhi NCR, India (Open to Remote)</div>
+              </div>
+            </div>
+
+            <!-- Social Networks card -->
+            <div class="contact-card">
+              <div class="contact-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              </div>
+              <div>
+                <div class="contact-card-title">Profiles &amp; Repositories</div>
+                <div class="hero-socials dynamic-socials" style="margin-top: 8px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Contact Form -->
+          <div class="contact-form-card reveal reveal-delay-2">
+            <div class="contact-form-badge">
+              <span class="whatsapp-live-dot"></span>
+              <span>Instant Delivery &bull; Phone Push &bull; WhatsApp +91 7763917713</span>
+            </div>
+            <h3 class="contact-form-title">Send a Direct Inquiry</h3>
+            <p class="contact-form-desc">Fill in your message below. It will be dispatched immediately to Chintu's phone &amp; email, and also opens in WhatsApp so you can connect directly!</p>
+
+            <form id="contact-form" action="https://wa.me/917763917713" method="GET" target="_blank" novalidate>
+              <input type="hidden" name="text" id="whatsapp-formatted-text" value="">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name" class="form-label">Your Name</label>
+                  <input type="text" id="contact-name" class="form-input" placeholder="e.g. Hiring Manager">
+                  <span id="contact-name-error" class="form-error-msg"></span>
+                </div>
+                <div class="form-group">
+                  <label for="contact-email" class="form-label">Your Email</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="recruiter@company.com">
+                  <span id="contact-email-error" class="form-error-msg"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">Subject</label>
+                <input type="text" id="contact-subject" class="form-input" placeholder="Data Analyst Role / Project Collaboration">
+                <span id="contact-subject-error" class="form-error-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">Your Message</label>
+                <textarea id="contact-message" class="form-textarea" placeholder="Write your message here, or leave blank for a quick greeting..."></textarea>
+                <span id="contact-message-error" class="form-error-msg"></span>
+              </div>
+
+              <button type="submit" id="contact-submit-btn" class="btn btn-primary form-submit-btn whatsapp-submit-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <span>Send Message Direct to Chintu</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </button>
+
+              <div id="contact-status-card" class="contact-status-card" style="display: none;">
+                <div class="status-card-header">
+                  <span class="status-check-icon">✓</span>
+                  <span>Message Dispatched Direct to Chintu!</span>
+                </div>
+                <p class="status-card-body">
+                  Your inquiry has been sent directly to Chintu's phone and email (<strong>chintukumaredu00@gmail.com</strong>). You can also continue the chat directly on WhatsApp (+91 7763917713) below.
+                </p>
+                <div class="status-card-actions">
+                  <a id="whatsapp-reopen-btn" href="https://wa.me/917763917713" target="_blank" rel="noopener noreferrer" class="status-action-btn">
+                    💬 Continue in WhatsApp (+91 7763917713)
+                  </a>
+                </div>
+              </div>
+
+              <div class="whatsapp-security-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Instantly delivers notification to Chintu's phone &amp; email, and opens WhatsApp.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       PROJECT QUICK-VIEW MODAL
+       ====================================================================== -->
+  <div id="project-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div id="modal-content-area">
+        <!-- Injected dynamically by modal.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       INTERACTIVE CERTIFICATE VIEWER LIGHTBOX MODAL
+       ====================================================================== -->
+  <div id="certificate-viewer-modal" class="cert-modal-backdrop" role="dialog" aria-modal="true" aria-label="Certificate Details Lightbox">
+    <div class="cert-modal-dialog">
+      <button id="cert-modal-close-btn" class="cert-modal-close-btn" aria-label="Close certificate viewer" title="Close preview">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div id="cert-modal-content-area">
+        <!-- Injected dynamically by certificateModal.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       FULLSCREEN RESUME DOCUMENT VIEWER MODAL
+       ====================================================================== -->
+  <div id="resume-viewer-modal" class="resume-modal-backdrop" role="dialog" aria-modal="true" aria-label="Fullscreen Resume Document Viewer">
+    <!-- Fixed Toolbar with Zoom, Download PDF & Print -->
+    <div class="resume-viewer-toolbar">
+      <button id="resume-zoom-out-btn" class="viewer-tool-btn" title="Zoom Out">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        <span>Zoom -</span>
+      </button>
+      <span id="resume-zoom-level-text" class="zoom-level-text">100%</span>
+      <button id="resume-zoom-in-btn" class="viewer-tool-btn" title="Zoom In">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        <span>Zoom +</span>
+      </button>
+      <button id="resume-zoom-reset-btn" class="viewer-tool-btn" title="Reset Zoom to 100%">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        <span>100%</span>
+      </button>
+
+      <button id="resume-fit-page-btn" class="viewer-tool-btn" title="Fit Entire 1-Page Resume on Screen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="9" x1="15" y1="3" y2="3"/><line x1="9" x1="15" y1="21" y2="21"/></svg>
+        <span>Fit 1-Page</span>
+      </button>
+
+      <a href="assets/Chintu_Kumar_Data_Analyst_Resume.pdf" download="Chintu_Kumar_Data_Analyst_Resume.pdf" class="viewer-tool-btn primary-cta" title="Download official PDF resume">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span>Download PDF</span>
+      </a>
+
+      <button id="modal-copy-ats-btn" class="viewer-tool-btn" title="Copy ATS Plain Text format to clipboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>Copy ATS Text</span>
+      </button>
+
+      <button id="modal-print-resume-btn" class="viewer-tool-btn" title="Print or Save PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        <span>Print</span>
+      </button>
+
+      <button id="close-resume-viewer-btn" class="viewer-tool-btn close-btn" title="Close Viewer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <span>Close</span>
+      </button>
+    </div>
+
+    <!-- Scalable Sheet Container -->
+    <div id="resume-modal-sheet-wrap" class="resume-modal-content-wrap">
+      <!-- Injected dynamically by resume.js -->
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       TOAST NOTIFICATION CONTAINER
+       ====================================================================== -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand-text">
+        © 2026 Chintu Kumar. Built with <span>Vanilla ES6 Modules</span> &amp; Modern CSS.
+      </div>
+      <ul class="footer-links">
+        <li><a href="#hero" class="footer-link">Home</a></li>
+        <li><a href="#about" class="footer-link">About</a></li>
+        <li><a href="#projects" class="footer-link">Projects</a></li>
+        <li><a href="#certificates" class="footer-link">Certificates</a></li>
+        <li><a href="#contact" class="footer-link">Contact</a></li>
+      </ul>
+      <button id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       FLOATING AI CHATBOT WIDGET (BOTTOM-RIGHT)
+       ====================================================================== -->
+  <!-- Floating Tooltip Hint -->
+  <div id="chatbot-tooltip-hint" class="chatbot-tooltip-hint">
+    ✨ Ask me about Chintu's projects &amp; skills!
+  </div>
+
+  <!-- Floating Launcher Button -->
+  <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" aria-label="Open Chintu AI Assistant" title="Ask AI about Chintu's Projects &amp; Portfolio">
+    <div class="chatbot-toggle-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+    </div>
+    <div class="chatbot-close-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </div>
+    <span class="chatbot-status-badge">
+      <span class="chatbot-status-dot"></span>
+      <span>AI</span>
+    </span>
+  </button>
+
+  <!-- Expandable Chat Window -->
+  <div id="chatbot-window" class="chatbot-window" role="dialog" aria-modal="true" aria-label="Chintu AI Portfolio Assistant">
+    <!-- Header -->
+    <div class="chatbot-header">
+      <div class="chatbot-header-profile">
+        <div class="chatbot-avatar-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+          <span class="chatbot-avatar-pulse"></span>
+        </div>
+        <div class="chatbot-header-text">
+          <div class="chatbot-header-title">
+            <span>Chintu AI</span>
+            <span class="chatbot-badge-tag">Voice &amp; Chat</span>
+          </div>
+          <div class="chatbot-header-subtitle">
+            <span class="chatbot-status-live-dot"></span> Online &bull; Voice Enabled
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-header-actions">
+        <button id="chatbot-voice-toggle-btn" class="chatbot-action-icon-btn active" aria-label="Toggle AI Voice Sound" title="Toggle AI voice responses (Speech Synthesis)">
+          <svg class="voice-sound-on-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg class="voice-sound-off-icon" style="display: none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <button id="chatbot-reset-btn" class="chatbot-action-icon-btn" aria-label="Reset Conversation" title="Reset chat history">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </button>
+        <button id="chatbot-close-btn" class="chatbot-action-icon-btn" aria-label="Close Chat" title="Minimize chat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="chatbot-messages" class="chatbot-messages" aria-live="polite">
+      <!-- Injected dynamically by chatbot.js -->
+    </div>
+
+    <!-- Quick Suggestion Chips -->
+    <div class="chatbot-chips-section">
+      <div class="chatbot-chips-label">Quick Inquiries</div>
+      <div id="chatbot-chips" class="chatbot-chips-wrap">
+        <!-- Injected dynamically by chatbot.js -->
+      </div>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="chatbot-footer">
+      <form id="chatbot-form" class="chatbot-form" autocomplete="off">
+        <button type="button" id="chatbot-mic-btn" class="chatbot-mic-btn" aria-label="Speak (Voice Input)" title="Speak your question (Voice Input)">
+          <svg class="mic-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        </button>
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask or tap 🎙️ to speak..." aria-label="Type or speak your message" />
+        <button type="submit" id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message" title="Send message" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </form>
+
+      <div id="chatbot-voice-status" class="chatbot-voice-status" style="display: none;">
+        <div class="voice-wave-animation">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="voice-status-text">Listening... Speak now</span>
+        <button type="button" id="chatbot-voice-cancel-btn" class="voice-cancel-btn" title="Cancel listening">✕</button>
+      </div>
+
+      <div class="chatbot-footer-caption">
+        🎙️ Voice Assistant Active &bull; Speak or Type &bull; Instant Answers
+      </div>
+    </div>
+  </div>
+
+  <!-- High-Performance Three.js r128 Engine with CDN fallback -->
+  <script src="js/vendor/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\\/script>');
+    }
+  </script>
+
+  <!-- Main JavaScript Module Entry Point -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

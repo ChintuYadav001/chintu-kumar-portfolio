@@ -1,0 +1,533 @@
+/* ==========================================================================
+   RESUME SECTION & ATS COMPACT DOCUMENT VIEWER
+   Module: resume.css
+   Authentic 1-Page Digital ATS Resume Format, tight executive spacing,
+   zero wasted space, dedicated fullscreen lightbox viewer, and print styles.
+   ========================================================================== */
+
+.resume-section {
+  position: relative;
+  padding-block: var(--space-12);
+}
+
+.resume-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+/* ==========================================================================
+   FULLSCREEN RESUME VIEWER LIGHTBOX MODAL
+   ========================================================================== */
+.resume-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(6, 9, 15, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.75rem 0.75rem 2rem 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.resume-modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fixed Document Viewer Floating Toolbar */
+.resume-viewer-toolbar {
+  position: sticky;
+  top: 0.25rem;
+  background: rgba(13, 17, 23, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.75rem;
+  z-index: 20;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 20px -3px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.viewer-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.viewer-tool-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+.viewer-tool-btn.primary-cta {
+  background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #ffffff;
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+.viewer-tool-btn.primary-cta:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #4f46e5 100%);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5);
+  color: #ffffff;
+}
+
+.viewer-tool-btn.close-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+.viewer-tool-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.zoom-level-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: center;
+}
+
+.resume-modal-content-wrap {
+  width: 100%;
+  max-width: 900px;
+  transform-origin: top center;
+  transition: transform 180ms ease-out;
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   AUTHENTIC COMPACT 1-PAGE ATS RESUME SHEET
+   ========================================================================== */
+.resume-paper-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.resume-paper {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  max-width: 672px; /* Reduced 20% from 840px for authentic compact 1-page fit */
+  width: 100%;
+  padding: 1rem 1.3rem; /* Reduced 20% padding */
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(56, 189, 248, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+  transition: all var(--transition-normal);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .resume-paper {
+    padding: 0.85rem 0.75rem;
+  }
+}
+
+/* Compact Document Header (20% Proportional Reduction) */
+.doc-header {
+  text-align: center;
+  padding-bottom: 0.3rem;
+  border-bottom: 1.5px solid rgba(56, 189, 248, 0.3);
+  margin-bottom: 0.35rem;
+}
+
+.doc-name {
+  font-size: clamp(1.45rem, 2.8vw, 1.8rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.doc-subhead {
+  font-size: 0.71rem;
+  font-family: var(--font-mono);
+  color: var(--text-accent);
+  font-weight: 600;
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+
+.doc-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  font-size: 0.67rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  line-height: 1.32;
+}
+
+.doc-contact-row a {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.doc-contact-row a:hover {
+  color: var(--text-accent);
+  text-decoration: underline;
+}
+
+.doc-sep {
+  color: var(--text-muted);
+}
+
+/* Compact Metrics Highlight Pill (No Scrollbars, Smooth Fit) */
+.doc-metrics-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  padding: 3px 14px;
+  background-color: var(--bg-tag);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  margin: 5px auto 0;
+  font-size: 0.70rem;
+  font-family: var(--font-mono);
+  color: var(--text-accent);
+  font-weight: 600;
+  max-width: 95%;
+  line-height: 1.35;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Compact ATS Sections (20% Proportional Reduction) */
+.doc-section {
+  margin-bottom: 0.32rem;
+}
+
+.doc-section:last-child {
+  margin-bottom: 0;
+}
+
+.doc-section-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid var(--border-accent);
+  margin-bottom: 2.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.doc-section-title svg {
+  width: 12px;
+  height: 12px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+
+.doc-objective-text {
+  font-size: 0.70rem;
+  color: var(--text-secondary);
+  line-height: 1.36;
+  text-align: justify;
+  margin: 0;
+}
+
+.doc-objective-text strong {
+  color: var(--text-primary);
+}
+
+/* Compact Skills Table (Proportional 2-Column Layout) */
+.doc-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc-skills-row {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 6px;
+  font-size: 0.69rem;
+  line-height: 1.32;
+}
+
+@media (max-width: 640px) {
+  .doc-skills-row {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+}
+
+.doc-skill-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+
+.doc-skill-values {
+  color: var(--text-secondary);
+}
+
+/* Compact Experience, Project & Education Items */
+.doc-item {
+  margin-bottom: 3px;
+}
+
+.doc-item:last-child {
+  margin-bottom: 0;
+}
+
+.doc-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 1px;
+}
+
+.doc-item-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.doc-item-role {
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.doc-item-org {
+  font-size: 0.72rem;
+  color: var(--accent-violet);
+  font-weight: 600;
+}
+
+.doc-item-date {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-accent);
+  white-space: nowrap;
+}
+
+.doc-item-tech {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.doc-bullets {
+  list-style: disc;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 1px 0 0 0;
+}
+
+.doc-bullet {
+  font-size: 0.69rem;
+  color: var(--text-secondary);
+  line-height: 1.34;
+}
+
+.doc-bullet strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   PRINT STYLES (@media print)
+   ========================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.3 !important;
+  }
+
+  .header,
+  .footer,
+  .glow-orb,
+  .hero,
+  #about,
+  #experience,
+  #skills,
+  #projects,
+  #certificates,
+  #contact,
+  .resume-actions-bar,
+  .resume-viewer-toolbar,
+  .modal-backdrop,
+  .cert-modal-backdrop,
+  .toast-container,
+  .section-header,
+  #back-to-top-btn,
+  #chatbot-toggle-btn,
+  #chatbot-window {
+    display: none !important;
+  }
+
+  section.resume-section {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .resume-modal-backdrop {
+    position: static !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .resume-modal-content-wrap {
+    transform: none !important;
+    max-width: 100% !important;
+  }
+
+  .resume-paper-wrapper {
+    display: block !important;
+  }
+
+  .resume-paper {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    color: #111111 !important;
+  }
+
+  .doc-header {
+    border-bottom: 1.5px solid #000000 !important;
+    padding-bottom: 4pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  .doc-name {
+    color: #000000 !important;
+    font-size: 16pt !important;
+  }
+
+  .doc-subhead {
+    color: #333333 !important;
+    font-size: 9pt !important;
+  }
+
+  .doc-contact-row,
+  .doc-contact-row a {
+    color: #444444 !important;
+    font-size: 8pt !important;
+  }
+
+  .doc-metrics-bar {
+    border: 1px solid #cccccc !important;
+    background: #f8f9fa !important;
+    color: #111111 !important;
+    padding: 2px 6px !important;
+  }
+
+  .doc-section {
+    margin-bottom: 6pt !important;
+  }
+
+  .doc-section-title {
+    color: #000000 !important;
+    border-bottom: 1.5px solid #000000 !important;
+    font-size: 8.5pt !important;
+    margin-top: 6pt !important;
+    margin-bottom: 3pt !important;
+  }
+
+  .doc-section-title svg {
+    display: none !important;
+  }
+
+  .doc-objective-text,
+  .doc-bullet,
+  .doc-skill-values {
+    color: #222222 !important;
+    font-size: 8pt !important;
+  }
+
+  .doc-item-role,
+  .doc-skill-label {
+    color: #000000 !important;
+  }
+
+  .doc-item-org {
+    color: #222222 !important;
+  }
+
+  .doc-item-date {
+    color: #444444 !important;
+  }
+
+  .doc-bullets {
+    padding-left: 10pt !important;
+  }
+}
+

@@ -1,0 +1,32 @@
+/* ==========================================================================
+   MASTER STYLESHEET (AGGREGATOR)
+   Module: main.css
+   Imports all modular stylesheets in appropriate architectural order
+   ========================================================================== */
+
+/* 1. Tokens & Design System */
+@import "variables.css";
+
+/* 2. Base Resets & Global Components */
+@import "base.css";
+
+/* 3. Animations & Motion */
+@import "animations.css";
+@import "tilt3d.css";
+@import "webgl-3d.css";
+
+/* 4. Layout & Section Modules */
+@import "navbar.css";
+@import "hero.css";
+@import "about.css";
+@import "timeline.css";
+@import "skills.css";
+@import "projects.css";
+@import "certificates.css";
+@import "certificateModal.css";
+@import "resume.css";
+@import "contact.css";
+@import "modal.css";
+@import "toast.css";
+@import "footer.css";
+@import "chatbot.css";
