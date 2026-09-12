@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ANIMATIONS & KEYFRAMES
+   Module: animations.css
+   ========================================================================== */
+
+/* Fade-in & Rise for Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child items */
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* Pulse animation for status indicator */
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--accent-emerald);
+  display: inline-block;
+  animation: pulse-dot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Glowing background ambient orbs */
+@keyframes float-orb {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: blur(80px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+  animation: float-orb 15s ease-in-out infinite alternate;
+}
+
+.glow-orb-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--gradient-primary);
+  top: 10%;
+  left: -5%;
+}
+
+.glow-orb-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--gradient-accent);
+  top: 45%;
+  right: -5%;
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typed-cursor {
+  display: inline-block;
+  color: var(--text-accent);
+  font-weight: var(--font-weight-normal);
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+}
+
+/* Spinner for buttons */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: var(--radius-full);
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+/* Card hover glow */
+.hover-glow {
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}

@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/antigrevity_project/*"
+  to = "/:splat"
+  status = 200
