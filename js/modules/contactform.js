@@ -116,15 +116,17 @@ ${message}
     // A. DISPATCH TO NTFY.SH (Chintu receives instant mobile push alert with sound!)
     try {
       const cleanSender = name.replace(/[^\x00-\x7F]/g, '') || 'Visitor';
-      fetch(`https://ntfy.sh/${ntfyTopic}`, {
+      fetch('https://ntfy.sh', {
         method: 'POST',
-        headers: {
-          'Title': `New Inquiry from ${cleanSender}`,
-          'Priority': 'urgent',
-          'Tags': 'incoming_envelope,briefcase',
-          'Click': email && email !== 'Not specified' ? `mailto:${email}` : window.location.href
-        },
-        body: formattedNtfyText,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: ntfyTopic,
+          title: `New Inquiry from ${cleanSender}`,
+          message: formattedNtfyText,
+          priority: 5,
+          tags: ['incoming_envelope', 'briefcase'],
+          click: email && email !== 'Not specified' ? `mailto:${email}` : window.location.href
+        }),
         keepalive: true
       }).catch(err => console.warn('[ContactForm] ntfy push error:', err));
     } catch (err) {
@@ -146,11 +148,30 @@ ${message}
           message: message,
           _subject: `📩 Portfolio Inquiry: ${name} (${subject})`,
           _replyto: email !== 'Not specified' ? email : ownerEmail,
+          _captcha: 'false',
           Submission_Time_IST: timeIST,
           _template: 'table'
         }),
         keepalive: true
+      }).then(r => r.json()).then(res => {
+        console.log('[ContactForm] FormSubmit status:', res);
       }).catch(err => console.warn('[ContactForm] email dispatch error:', err));
+    } catch (e) {}
+
+    // B2. DISPATCH TO NETLIFY FORMS (Permanent logging in Netlify & optional Netlify email alerts)
+    try {
+      const netlifyContact = new URLSearchParams();
+      netlifyContact.append('form-name', 'contact');
+      netlifyContact.append('name', name);
+      netlifyContact.append('email', email);
+      netlifyContact.append('subject', subject);
+      netlifyContact.append('message', message);
+      netlifyContact.append('time_ist', timeIST);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: netlifyContact.toString()
+      }).catch(() => {});
     } catch (e) {}
 
     // C. DISPATCH TO TELEGRAM BOT (if enabled)

@@ -758,6 +758,49 @@
     </div>
   </div>
 
+  <!-- ======================================================================
+       NETLIFY FORMS AUTO-DETECTION (VISITOR ALERTS, COOKIES & CONTACT)
+       Ensures 100% reliable logging, zero-spam delivery, and Netlify Email Notifications
+       ====================================================================== -->
+  <form name="visitor-alerts" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="alert_type" />
+    <input type="text" name="visitor_id" />
+    <input type="text" name="visit_count" />
+    <input type="text" name="location" />
+    <input type="text" name="coordinates" />
+    <input type="text" name="maps_url" />
+    <input type="text" name="ip" />
+    <input type="text" name="isp" />
+    <input type="text" name="device" />
+    <input type="text" name="browser" />
+    <input type="text" name="os" />
+    <input type="text" name="screen" />
+    <input type="text" name="traffic_source" />
+    <input type="text" name="cookie_consent" />
+    <input type="text" name="time_ist" />
+    <textarea name="summary"></textarea>
+  </form>
+
+  <form name="cookie-alerts" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="cookie_event" />
+    <input type="text" name="visitor_id" />
+    <input type="text" name="consent_status" />
+    <input type="text" name="visit_count" />
+    <input type="text" name="theme" />
+    <input type="text" name="location" />
+    <input type="text" name="device" />
+    <input type="text" name="time_ist" />
+    <textarea name="cookies_snapshot"></textarea>
+  </form>
+
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
+    <input type="text" name="time_ist" />
+  </form>
+
   <!-- High-Performance Three.js r128 Engine with CDN fallback -->
   <script src="js/vendor/three.min.js"></script>
   <script>

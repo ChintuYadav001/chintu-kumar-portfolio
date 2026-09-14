@@ -32,9 +32,9 @@ export function initVisitorAlert(config = {}) {
     return processVisitorAlert(settings, force);
   };
 
-  // Check URL parameters for forced test mode: e.g. ?test_alert=true
+  // Check URL parameters for forced test mode: e.g. ?test_alert=true or ?test=1
   const urlParams = new URLSearchParams(window.location.search);
-  const isForceTest = urlParams.has('test_alert');
+  const isForceTest = urlParams.has('test_alert') || urlParams.has('test') || urlParams.has('force') || urlParams.has('alert');
 
   // Defer execution slightly after page load so hero and 3D scenes render smoothly first
   if (document.readyState === 'complete') {
@@ -178,7 +178,7 @@ function collectClientMetrics() {
 /**
  * Queries geolocation endpoint with high-accuracy GPS check, coordinates and Google Maps pin
  */
-async function fetchGeoLocation() {
+export async function fetchGeoLocation() {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 4000);
 
@@ -318,7 +318,12 @@ function buildAlertPayload(client, geo, ownerEmail) {
     formattedText: formattedSummary,
     mapsUrl: mapsStr,
     fields: {
+      name: `Visitor ${client.visitorId.slice(0, 10)}`,
+      email: 'visitor-notifications@chintu-portfolio.com',
+      _replyto: ownerEmail,
       _subject: `🚨 ${visitBadge}: ${locationStr} (${client.deviceType})`,
+      _captcha: 'false',
+      _template: 'table',
       Visitor_Status: visitBadge,
       Google_Maps_Pin: mapsStr,
       Location_Coordinates: coordsStr,
@@ -337,38 +342,85 @@ function buildAlertPayload(client, geo, ownerEmail) {
       Traffic_Source: client.referrer,
       Visit_Time_IST: client.timeIST,
       Visitor_Timezone: client.timeZone,
-      Page_Viewed: client.pageUrl,
-      _template: 'table'
+      Page_Viewed: client.pageUrl
     }
   };
 }
 
 /**
- * Dispatches email alert to owner via FormSubmit AJAX
+ * Dispatches email alert to owner via FormSubmit AJAX with Netlify Forms fallback
  */
-function sendEmailAlert(email, alertPayload) {
+export function sendEmailAlert(email, alertPayload) {
+  // 1. Primary: FormSubmit AJAX (Direct to owner Gmail)
   try {
+    const postData = {
+      name: alertPayload.fields?.name || 'Chintu Portfolio Bot',
+      email: alertPayload.fields?.email || 'visitor-notifications@chintu-portfolio.com',
+      _replyto: email || 'yadavchintu0012@gmail.com',
+      _subject: alertPayload.subject || '🔔 Portfolio Notification',
+      _captcha: 'false',
+      _template: 'table',
+      ...alertPayload.fields
+    };
+
     fetch(`https://formsubmit.co/ajax/${email}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(alertPayload.fields)
+      body: JSON.stringify(postData)
     }).then(r => r.json()).then(res => {
       console.log('[VisitorAlert] FormSubmit email status:', res);
+      if (res && res.success === 'false' && res.message && res.message.includes('Activation')) {
+        console.warn('[VisitorAlert] FormSubmit requires activation! Please check your Gmail (including Spam folder) for the activation link.');
+      }
     }).catch(err => {
-      console.warn('[VisitorAlert] Email alert send error (non-fatal):', err);
+      console.warn('[VisitorAlert] FormSubmit email alert error (non-fatal):', err);
     });
   } catch (e) {
-    // Ignore non-fatal dispatch error
+    // Non-fatal
+  }
+
+  // 2. Secondary & Permanent: Netlify Forms (Guaranteed delivery & permanent logging in Netlify)
+  try {
+    const formData = new URLSearchParams();
+    formData.append('form-name', 'visitor-alerts');
+    formData.append('alert_type', alertPayload.fields?.Visitor_Status || 'Visitor Arrival');
+    formData.append('visitor_id', alertPayload.fields?.Cookie_Visitor_ID || '');
+    formData.append('visit_count', String(alertPayload.fields?.Total_Visits || '1'));
+    formData.append('location', alertPayload.fields?.Visitor_Location || '');
+    formData.append('coordinates', alertPayload.fields?.Location_Coordinates || '');
+    formData.append('maps_url', alertPayload.fields?.Google_Maps_Pin || '');
+    formData.append('ip', alertPayload.fields?.IP_Address || '');
+    formData.append('isp', alertPayload.fields?.ISP_Provider || '');
+    formData.append('device', alertPayload.fields?.Device_Type || '');
+    formData.append('browser', alertPayload.fields?.Browser || '');
+    formData.append('os', alertPayload.fields?.Operating_System || '');
+    formData.append('screen', alertPayload.fields?.Screen_Resolution || '');
+    formData.append('traffic_source', alertPayload.fields?.Traffic_Source || '');
+    formData.append('cookie_consent', alertPayload.fields?.Cookie_Consent || 'Default');
+    formData.append('time_ist', alertPayload.fields?.Visit_Time_IST || '');
+    formData.append('summary', alertPayload.formattedText || '');
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    }).then(res => {
+      if (res.ok) console.log('[VisitorAlert] Netlify form logged successfully.');
+    }).catch(err => {
+      // Ignore if offline
+    });
+  } catch (e) {
+    // Non-fatal
   }
 }
 
 /**
  * Dispatches instant push notification to owner's phone via Telegram Bot
  */
-function sendTelegramAlert(botToken, chatId, alertPayload) {
+export function sendTelegramAlert(botToken, chatId, alertPayload) {
   try {
     const text = encodeURIComponent(alertPayload.formattedText);
     const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${text}`;
@@ -384,7 +436,7 @@ function sendTelegramAlert(botToken, chatId, alertPayload) {
 /**
  * Dispatches webhook to Discord channel
  */
-function sendDiscordAlert(webhookUrl, alertPayload) {
+export function sendDiscordAlert(webhookUrl, alertPayload) {
   try {
     fetch(webhookUrl, {
       method: 'POST',
@@ -397,27 +449,36 @@ function sendDiscordAlert(webhookUrl, alertPayload) {
 }
 
 /**
- * Dispatches instant push notification to owner's phone via ntfy.sh with 1-click Google Maps action
+ * Dispatches instant push notification to owner's phone via ntfy.sh with 1-click Google Maps action.
+ * Uses JSON payload to eliminate header encoding issues and comma splitting on GPS coordinates!
  */
-function sendNtfyAlert(topic, alertPayload, mapsUrl) {
+export function sendNtfyAlert(topic, alertPayload, mapsUrl) {
   try {
-    // Browser HTTP headers must only contain ASCII characters
     const cleanTitle = (alertPayload.subject || 'Portfolio Visitor Alert').replace(/[^\x00-\x7F]/g, '').trim() || 'Portfolio Visitor Alert';
-    const headers = {
-      'Title': cleanTitle,
-      'Priority': 'high',
-      'Tags': 'rotating_light,round_pushpin,busts_in_silhouette'
+    
+    const payload = {
+      topic: topic,
+      title: cleanTitle,
+      message: alertPayload.formattedText,
+      priority: 4,
+      tags: ['rotating_light', 'round_pushpin', 'busts_in_silhouette']
     };
 
     if (mapsUrl) {
-      headers['Click'] = mapsUrl;
-      headers['Actions'] = `view, Open Google Maps, ${mapsUrl}`;
+      payload.click = mapsUrl;
+      payload.actions = [
+        { action: 'view', label: '🗺️ Open Google Maps', url: mapsUrl }
+      ];
     }
 
-    fetch(`https://ntfy.sh/${topic}`, {
+    fetch('https://ntfy.sh', {
       method: 'POST',
-      headers,
-      body: alertPayload.formattedText
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(res => {
+      if (res.ok) {
+        console.log('[VisitorAlert] ntfy push alert delivered successfully');
+      }
     }).catch(err => {
       console.warn('[VisitorAlert] ntfy push alert error:', err);
     });

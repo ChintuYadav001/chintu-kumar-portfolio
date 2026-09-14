@@ -7,6 +7,8 @@
 
 import { getIcon } from './icons.js';
 import { showToast } from './toast.js';
+import { sendEmailAlert, sendNtfyAlert } from './visitorAlert.js';
+import { portfolioData } from '../data/portfolioData.js';
 
 // --------------------------------------------------------------------------
 // 1. Standard Cookie Manipulation API
@@ -318,6 +320,7 @@ export function initCookieBanner() {
       setCookie('ck_consent', 'accepted', 365);
       hideCookieBanner();
       showToast('🍪 All cookie preferences saved!', 'success');
+      sendCookieAlert('Accepted All Cookies');
     });
   }
 
@@ -332,6 +335,7 @@ export function initCookieBanner() {
       setCookie('ck_consent', 'essential', 90);
       hideCookieBanner();
       showToast('🍪 Essential cookies enabled.', 'info');
+      sendCookieAlert('Essential Only Selected');
     });
   }
 
@@ -372,6 +376,120 @@ function hideCookieBanner() {
 // --------------------------------------------------------------------------
 
 /**
+ * Dispatches live cookie preferences and visitor telemetry to Chintu's Gmail & phone
+ * @param {string} eventAction - e.g. 'Accepted All Cookies', 'Essential Only', 'Manual Snapshot'
+ */
+export function sendCookieAlert(eventAction = 'Cookie Preferences Saved') {
+  try {
+    const ownerEmail = portfolioData?.personalInfo?.email || 'yadavchintu0012@gmail.com';
+    const ntfyTopic = portfolioData?.visitorAlert?.ntfy?.topic || 'chintu_portfolio_alerts_7763';
+
+    const visitorId = getCookie('ck_visitor_id') || 'New Visitor';
+    const visitCount = getCookie('ck_visit_count') || '1';
+    const firstVisit = getCookie('ck_first_visit') || 'Just Now';
+    const lastVisit = getCookie('ck_last_visit') || 'Active Session';
+    const referrer = getCookie('ck_referrer') || 'Direct Visit';
+    const device = getCookie('ck_device') || 'Desktop';
+    const browser = getCookie('ck_browser') || 'Chrome';
+    const os = getCookie('ck_os') || 'Windows';
+    const screen = getCookie('ck_screen') || `${window.screen.width}x${window.screen.height}`;
+    const consent = getCookie('ck_consent') || eventAction;
+    const theme = getCookie('ck_theme') || (document.documentElement.getAttribute('data-theme') || 'dark');
+    const geoLocation = getCookie('ck_geo_location') || 'Location Detected';
+    const mapCoords = getCookie('ck_map_coords') || 'Detecting Coordinates...';
+    const mapsUrl = getCookie('ck_maps_url') || (mapCoords.includes(',') ? `https://www.google.com/maps?q=${encodeURIComponent(mapCoords)}` : '');
+    const accuracy = getCookie('ck_geo_accuracy') || 'City / ISP Precision';
+
+    const now = new Date();
+    const timeIST = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'medium' });
+
+    const formattedSummary = 
+`🍪 PORTFOLIO COOKIE PREFERENCES SAVED!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Action: ${eventAction}
+👤 Visitor ID: ${visitorId}
+🔄 Total Visits: ${visitCount}
+🍪 Consent Status: ${consent}
+🎨 Theme Selected: ${theme.toUpperCase()}
+📍 Location: ${geoLocation}
+🗺️ Google Maps: ${mapsUrl || 'N/A'}
+🛰️ Coordinates: ${mapCoords || 'N/A'}
+🎯 Accuracy: ${accuracy}
+📱 Device: ${device} (${os} • ${browser})
+🖥️ Screen: ${screen}
+🔗 Traffic Source: ${referrer}
+📅 First Visit: ${firstVisit}
+🕒 Latest Visit: ${lastVisit}
+⏰ Time (IST): ${timeIST}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 Dispatched to Chintu's Gmail (${ownerEmail}) & Phone Push.`;
+
+    const alertPayload = {
+      subject: `🍪 Cookie Preferences Saved: ${eventAction} (${geoLocation})`,
+      formattedText: formattedSummary,
+      mapsUrl: mapsUrl,
+      fields: {
+        name: `Cookie Tracker (${visitorId.slice(0, 8)})`,
+        email: 'cookie-notifications@chintu-portfolio.com',
+        _replyto: ownerEmail,
+        _subject: `🍪 Cookie Alert: ${eventAction} (${geoLocation})`,
+        _captcha: 'false',
+        _template: 'table',
+        Event_Action: eventAction,
+        Visitor_Cookie_ID: visitorId,
+        Total_Visits: visitCount,
+        Consent_Status: consent,
+        Active_Theme: theme.toUpperCase(),
+        Visitor_Location: geoLocation,
+        Location_Coordinates: mapCoords,
+        Google_Maps_Pin: mapsUrl || 'N/A',
+        Device_System: `${device} (${os} • ${browser})`,
+        Screen_Resolution: screen,
+        Traffic_Source: referrer,
+        First_Visit_Date: firstVisit,
+        Latest_Visit_Date: lastVisit,
+        Event_Time_IST: timeIST
+      }
+    };
+
+    // 1. Dispatch Email to owner via FormSubmit & Netlify Forms
+    sendEmailAlert(ownerEmail, alertPayload);
+
+    // 2. Dispatch Netlify Form (specifically for cookie alerts)
+    try {
+      const netlifyData = new URLSearchParams();
+      netlifyData.append('form-name', 'cookie-alerts');
+      netlifyData.append('cookie_event', eventAction);
+      netlifyData.append('visitor_id', visitorId);
+      netlifyData.append('consent_status', consent);
+      netlifyData.append('visit_count', visitCount);
+      netlifyData.append('theme', theme);
+      netlifyData.append('location', geoLocation);
+      netlifyData.append('device', `${device} (${os})`);
+      netlifyData.append('time_ist', timeIST);
+      netlifyData.append('cookies_snapshot', formattedSummary);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: netlifyData.toString()
+      }).catch(() => {});
+    } catch (e) {}
+
+    // 3. Dispatch Instant Mobile/Browser Push via ntfy
+    sendNtfyAlert(ntfyTopic, {
+      subject: `🍪 Cookie Alert: ${eventAction}`,
+      formattedText: formattedSummary
+    }, mapsUrl);
+
+    console.log(`%c[Cookies] 🍪 Notification dispatched to ${ownerEmail}: ${eventAction}`, 'color: #38bdf8; font-weight: bold;');
+    return true;
+  } catch (err) {
+    console.warn('[Cookies] Failed to dispatch cookie alert:', err);
+    return false;
+  }
+}
+
+/**
  * Creates and opens the Cookie Details modal showing live stored values
  */
 export function openCookieModal() {
@@ -404,14 +522,25 @@ export function openCookieModal() {
         </div>
 
         <div class="cookie-modal-footer">
-          <button type="button" id="cookie-modal-clear-btn" class="cookie-modal-btn-danger">
-            ${getIcon('refresh')}
-            <span>Clear All Cookies</span>
-          </button>
-          <button type="button" id="cookie-modal-ok-btn" class="cookie-modal-btn-primary">
-            ${getIcon('check')}
-            <span>Got It</span>
-          </button>
+          <div class="cookie-modal-footer-left">
+            <button type="button" id="cookie-modal-clear-btn" class="cookie-modal-btn-danger" title="Clear local cookies">
+              ${getIcon('refresh')}
+              <span>Clear Cookies</span>
+            </button>
+            <button type="button" id="cookie-modal-send-btn" class="cookie-modal-btn-info" title="Send live cookie snapshot directly to Chintu's Gmail">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              <span>Send Cookies to Gmail</span>
+            </button>
+          </div>
+          <div class="cookie-modal-footer-right">
+            <button type="button" id="cookie-modal-verify-btn" class="cookie-modal-btn-verify" title="Verify / Activate Gmail Alert Delivery">
+              <span>🔔 Activate / Test Gmail</span>
+            </button>
+            <button type="button" id="cookie-modal-ok-btn" class="cookie-modal-btn-primary">
+              ${getIcon('check')}
+              <span>Got It</span>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -436,6 +565,16 @@ export function openCookieModal() {
       renderCookieModalContent();
       showToast('All portfolio cookies cleared!', 'info');
     });
+
+    modal.querySelector('#cookie-modal-send-btn').addEventListener('click', () => {
+      sendCookieAlert('Manual Snapshot Sent via Cookie Modal');
+      showToast('✉️ Cookie details dispatched to yadavchintu0012@gmail.com!', 'success');
+    });
+
+    modal.querySelector('#cookie-modal-verify-btn').addEventListener('click', () => {
+      // Trigger FormSubmit direct test form submission
+      triggerDirectFormSubmitActivation();
+    });
   }
 
   renderCookieModalContent();
@@ -448,6 +587,45 @@ export function closeCookieModal() {
   if (modal) {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+  }
+}
+
+/**
+ * Directly submits a standard POST form to FormSubmit in a new tab so the user can see activation status
+ */
+export function triggerDirectFormSubmitActivation() {
+  try {
+    const ownerEmail = portfolioData?.personalInfo?.email || 'yadavchintu0012@gmail.com';
+    const form = document.createElement('form');
+    form.action = `https://formsubmit.co/${ownerEmail}`;
+    form.method = 'POST';
+    form.target = '_blank';
+    form.style.display = 'none';
+
+    const fields = {
+      name: 'Portfolio Alerts Activator',
+      email: ownerEmail,
+      _subject: '🔔 Chintu Portfolio - Gmail & Cookie Alert Verification',
+      _replyto: ownerEmail,
+      _captcha: 'false',
+      message: `FormSubmit alert activation test dispatched for ${ownerEmail}. If you see 'Activate Form' in your Gmail (or Spam folder), please click it once to enable instant email delivery for visitor and cookie alerts.`
+    };
+
+    for (const [key, val] of Object.entries(fields)) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = val;
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    showToast('📧 FormSubmit activation opened! Check your Gmail (and Spam folder) for the confirmation link.', 'info');
+  } catch (e) {
+    console.warn('[Cookies] Failed to trigger FormSubmit activation:', e);
   }
 }
 
@@ -492,6 +670,25 @@ function renderCookieModalContent() {
   ];
 
   container.innerHTML = `
+    <!-- Gmail & Notification Status Card -->
+    <div class="cookie-gmail-status-card">
+      <div class="cookie-gmail-icon-wrap">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="cookie-gmail-text">
+        <div class="cookie-gmail-title">
+          <span>Alerts Connected to Gmail &amp; Phone Push</span>
+          <span class="cookie-gmail-live-badge">Live Active</span>
+        </div>
+        <p class="cookie-gmail-desc">
+          Cookie &amp; visitor notifications route to: <code>yadavchintu0012@gmail.com</code> &bull; Push: <code>ntfy.sh/chintu_portfolio_alerts_7763</code>
+        </p>
+      </div>
+      <button type="button" id="cookie-instant-test-btn" class="cookie-mini-test-btn" title="Send live snapshot right now">
+        <span>⚡ Test Alert</span>
+      </button>
+    </div>
+
     <!-- KPI Summary Grid -->
     <div class="cookie-kpi-grid">
       <div class="cookie-kpi-card">
@@ -561,6 +758,15 @@ function renderCookieModalContent() {
       <span>🔒 <strong>Privacy Assurance:</strong> All cookies are stored locally inside your browser and never shared with third-party advertisers.</span>
     </div>
   `;
+
+  // Bind Instant Test Button
+  const instantTestBtn = document.getElementById('cookie-instant-test-btn');
+  if (instantTestBtn) {
+    instantTestBtn.addEventListener('click', () => {
+      sendCookieAlert('Instant Test Alert from Cookie Inspector');
+      showToast('⚡ Live Cookie & Visitor Alert sent to yadavchintu0012@gmail.com!', 'success');
+    });
+  }
 }
 
 /**
@@ -600,4 +806,6 @@ if (typeof window !== 'undefined') {
   window.clearVisitorCookies = clearAllVisitorCookies;
   window.openCookieModal = openCookieModal;
   window.renderCookieModalContent = renderCookieModalContent;
+  window.sendCookieAlert = sendCookieAlert;
+  window.triggerDirectFormSubmitActivation = triggerDirectFormSubmitActivation;
 }
