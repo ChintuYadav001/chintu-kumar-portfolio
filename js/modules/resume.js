@@ -41,6 +41,9 @@ export function closeResumeModal() {
   if (modalBackdrop) {
     modalBackdrop.classList.remove('open');
   }
+  if (window.location.hash === '#resume') {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  }
   document.body.style.overflow = '';
 }
 
@@ -78,6 +81,16 @@ export function initResume(portfolioData) {
       openResumeModal();
     });
   });
+
+  // Support direct anchor navigation #resume
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#resume') {
+      openResumeModal();
+    }
+  });
+  if (window.location.hash === '#resume') {
+    openResumeModal();
+  }
 
   if (closeViewerBtn) {
     closeViewerBtn.addEventListener('click', closeResumeModal);
@@ -237,7 +250,7 @@ function generateResumeHTML(data) {
       <!-- Document Header -->
       <header class="doc-header">
         <h1 class="doc-name">CHINTU KUMAR</h1>
-        <div class="doc-subhead">Data Analyst | Python | SQL | Power BI | Excel</div>
+        <div class="doc-subhead">Aspiring Data Analyst | Python | SQL | Power BI</div>
         <div class="doc-contact-row">
           <a href="mailto:${resumeEmail}" class="doc-copy-trigger" data-copy-val="${resumeEmail}" title="Copy email">${resumeEmail}</a>
           <span class="doc-sep">|</span>
@@ -248,13 +261,11 @@ function generateResumeHTML(data) {
           <a href="https://github.com/ChintuYadav001" target="_blank" rel="noopener noreferrer" title="View GitHub Profile">${getIcon('external')} github.com/ChintuYadav001</a>
         </div>
         <div class="doc-metrics-bar">
-          <span>100+ SQL Queries Solved</span>
+          <span>100+ SQL Problems Solved</span>
           <span class="doc-sep">•</span>
           <span>10,000+ Records Analyzed</span>
           <span class="doc-sep">•</span>
           <span>3 End-to-End Analytics Projects</span>
-          <span class="doc-sep">•</span>
-          <span>50,000+ Raw Rows Cleaned</span>
         </div>
       </header>
 
@@ -281,12 +292,12 @@ function generateResumeHTML(data) {
             <span class="doc-skill-values">Exploratory Data Analysis (EDA), Data Cleaning, Data Wrangling, Statistical Analysis</span>
           </li>
           <li class="doc-skills-row">
-            <span class="doc-skill-label">• Data Visualization &amp; BI:</span>
-            <span class="doc-skill-values">Power BI (Dashboards, DAX: CALCULATE, SUMX, RANKX), MS Excel (Pivot Tables, VLOOKUP, INDEX-MATCH)</span>
+            <span class="doc-skill-label">• Data Visualization &amp; BI Tools:</span>
+            <span class="doc-skill-values">Power BI (Dashboards, DAX basics: CALCULATE, SUMX, RANKX), Microsoft Excel (Pivot Tables, VLOOKUP, INDEX-MATCH, Charts)</span>
           </li>
           <li class="doc-skills-row">
             <span class="doc-skill-label">• Database Management:</span>
-            <span class="doc-skill-values">MySQL, PostgreSQL (Joins, Subqueries, Aggregate Functions, Window Functions), Data Modeling, ETL Basics</span>
+            <span class="doc-skill-values">MySQL (Joins, Subqueries, Aggregate Functions, Window Functions), Data Modeling, ETL Basics</span>
           </li>
           <li class="doc-skills-row">
             <span class="doc-skill-label">• Business Analytics:</span>
@@ -332,15 +343,14 @@ function generateResumeHTML(data) {
         <div class="doc-item">
           <div class="doc-item-header">
             <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-rfm">Customer Behavior &amp; RFM Segmentation Analysis (End-to-End)</a>
+              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-rfm">Customer Behavior &amp; RFM Segmentation Analysis</a>
               <span class="doc-sep">|</span>
-              <span class="doc-item-tech">Python, Pandas, NumPy, Matplotlib, Seaborn, Power BI</span>
+              <span class="doc-item-tech">Python, Pandas, NumPy, Matplotlib, Seaborn</span>
             </div>
           </div>
           <ul class="doc-bullets">
             <li class="doc-bullet">• Cleaned and analyzed <strong>10,000+ customer transaction records</strong>, engineering RFM (Recency, Frequency, Monetary) features to segment customers into 5 value tiers.</li>
             <li class="doc-bullet">• Identified high-value and at-risk segments (<strong>~20% of customers driving 60%+ of revenue</strong>), surfacing retention opportunities for targeted marketing.</li>
-            <li class="doc-bullet">• Built an interactive <strong>Power BI dashboard</strong> to visualize customer segments and RFM scores, enabling stakeholders to track retention and revenue trends at a glance.</li>
           </ul>
         </div>
 
@@ -348,13 +358,13 @@ function generateResumeHTML(data) {
         <div class="doc-item">
           <div class="doc-item-header">
             <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-sales">Sales Performance Analysis (End-to-End)</a>
+              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-sales">Sales Performance Analysis</a>
               <span class="doc-sep">|</span>
               <span class="doc-item-tech">Python, SQL, Pandas, Matplotlib, Seaborn, Power BI</span>
             </div>
           </div>
           <ul class="doc-bullets">
-            <li class="doc-bullet">• Wrote complex SQL queries (joins, aggregations, window functions) to extract and summarize sales, revenue, and profit across regions and categories using the <strong>Superstore dataset (9,800+ records)</strong>.</li>
+            <li class="doc-bullet">• Wrote SQL queries (joins, aggregations, window functions) to extract and summarize sales, revenue, and profit across regions and categories using the <strong>Superstore dataset (9,800+ records)</strong>.</li>
             <li class="doc-bullet">• Built an interactive <strong>Power BI dashboard (5+ visuals)</strong> highlighting top products and seasonal trends, surfacing 3+ actionable improvement areas.</li>
           </ul>
         </div>
@@ -363,7 +373,7 @@ function generateResumeHTML(data) {
         <div class="doc-item">
           <div class="doc-item-header">
             <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-traffic">Website Traffic Analysis (End-to-End)</a>
+              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-traffic">Website Traffic Analysis</a>
               <span class="doc-sep">|</span>
               <span class="doc-item-tech">Python, Pandas, NumPy, Matplotlib, Seaborn</span>
             </div>
@@ -384,7 +394,7 @@ function generateResumeHTML(data) {
               <span class="doc-item-role">B.Tech, Computer Science (AI &amp; DS)</span>
               <span class="doc-sep">|</span>
               <span class="doc-item-org">IIMT Engineering College (AKTU)</span>
-              <span class="doc-sep">—</span>
+              <span class="doc-sep">•</span>
               <span class="doc-item-tech">CGPA: <strong>7.2</strong></span>
             </div>
             <span class="doc-item-date">2023 – 2027</span>
@@ -394,10 +404,10 @@ function generateResumeHTML(data) {
         <div class="doc-item">
           <div class="doc-item-header">
             <div class="doc-item-title-wrap">
-              <span class="doc-item-role">Class XII (CBSE)</span>
+              <span class="doc-item-role">XII (CBSE)</span>
               <span class="doc-sep">|</span>
               <span class="doc-item-org">Paramount Academy</span>
-              <span class="doc-sep">—</span>
+              <span class="doc-sep">•</span>
               <span class="doc-item-tech">Percentage: <strong>67.6%</strong></span>
             </div>
             <span class="doc-item-date">2023</span>
@@ -407,10 +417,10 @@ function generateResumeHTML(data) {
         <div class="doc-item">
           <div class="doc-item-header">
             <div class="doc-item-title-wrap">
-              <span class="doc-item-role">Class X (CBSE)</span>
+              <span class="doc-item-role">X (CBSE)</span>
               <span class="doc-sep">|</span>
               <span class="doc-item-org">Paramount Academy</span>
-              <span class="doc-sep">—</span>
+              <span class="doc-sep">•</span>
               <span class="doc-item-tech">Percentage: <strong>65.4%</strong></span>
             </div>
             <span class="doc-item-date">2021</span>
@@ -422,13 +432,11 @@ function generateResumeHTML(data) {
       <section class="doc-section">
         <h2 class="doc-section-title">${getIcon('award')} ACHIEVEMENTS &amp; CERTIFICATIONS</h2>
         <ul class="doc-bullets">
-          <li class="doc-bullet">• <a href="https://coursera.org/verify/professional-cert/EP3O21XSWB7Z" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-google-data-analytics" title="Preview Certificate">${getIcon('external')} <strong>Google Data Analytics Professional Certificate</strong></a> – Google &amp; Coursera (ID: EP3O21XSWB7Z, Jun 2026).</li>
-          <li class="doc-bullet">• <a href="https://www.pw.live" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-pw-aiml-bootcamp" title="Preview Certificate">${getIcon('external')} <strong>AI/ML Launchpad Bootcamp</strong></a> – Physics Wallah (PW) &amp; NSDC (Cert: f88d59a0-c12b-474b-b0e7-092097a0fbd8, Jun 2026).</li>
-          <li class="doc-bullet">• <a href="https://www.skillcourse.in" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-skillcourse-powerbi" title="Preview Certificate">${getIcon('external')} <strong>Power BI Micro Course</strong></a> – Skill Course (ID: SC-B22A7DDD69, ISO 9001:2015, Completed: 18/12/2025).</li>
-          <li class="doc-bullet">• <a href="https://www.hackerrank.com/certificates/967bfb00fd4b" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-hackerrank-sql" title="Preview Certificate">${getIcon('external')} <strong>SQL (Basic) Skill Certification</strong></a> – HackerRank (Earned: 07 Mar 2026).</li>
-          <li class="doc-bullet">• <a href="https://verify.onwingspan.com" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-infosys-datascience" title="Preview Certificate">${getIcon('external')} <strong>Python for Data Science</strong></a> – Infosys Springboard (Issued: April 27, 2025, verify.onwingspan.com).</li>
-          <li class="doc-bullet">• <a href="https://iimtindia.net" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-iimt-iot" title="Preview Certificate">${getIcon('external')} <strong>Advance Internet of Things (IoT)</strong></a> – IIMT College of Engineering &amp; Technoledge (Cert: T/IOT/712613/25).</li>
-          <li class="doc-bullet">• Solved <strong>100+ SQL queries and challenges on LeetCode &amp; HackerRank</strong>, strengthening query optimization.</li>
+          <li class="doc-bullet">• Completed the <a href="https://coursera.org/verify/professional-cert/EP3O21XSWB7Z" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-google-data-analytics" title="Preview Certificate">${getIcon('external')} <strong>Google Data Analytics Professional Certificate</strong></a> (Coursera), with hands-on projects in EDA, data cleaning, and visualization.</li>
+          <li class="doc-bullet">• Solved <strong>100+ SQL problems on LeetCode</strong>, strengthening query writing and analytical thinking.</li>
+          <li class="doc-bullet">• Earned <a href="https://www.hackerrank.com/certificates/967bfb00fd4b" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-hackerrank-sql" title="Preview Certificate">${getIcon('external')} <strong>SQL certification from HackerRank</strong></a>, validating database and query skills.</li>
+          <li class="doc-bullet">• Built interactive dashboards in Power BI through a hands-on micro-course (<a href="https://www.skillcourse.in" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-skillcourse-powerbi" title="Preview Certificate">${getIcon('external')} <strong>Power BI Micro Course</strong></a>).</li>
+          <li class="doc-bullet">• Completed <a href="https://verify.onwingspan.com" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-infosys-datascience" title="Preview Certificate">${getIcon('external')} <strong>Python for Data Science</strong></a> (Infosys Springboard), applying Pandas and NumPy to real datasets.</li>
         </ul>
       </section>
     </article>
@@ -444,9 +452,9 @@ function generateAtsPlainText(data) {
   const phone = personalInfo.phone || '+91 7763917713';
 
   return `CHINTU KUMAR
-Data Analyst | Python | SQL | Power BI | Excel
+Aspiring Data Analyst | Python | SQL | Power BI
 ${resumeEmail} | ${phone} | linkedin.com/in/chintu-kumar-767909190 | github.com/ChintuYadav001
-100+ SQL Queries Solved • 10,000+ Records Analyzed • 3 End-to-End Analytics Projects • 50,000+ Raw Rows Cleaned
+100+ SQL Problems Solved • 10,000+ Records Analyzed • 3 End-to-End Analytics Projects
 
 CAREER OBJECTIVE
 B.Tech Computer Science (AI & DS) student with a strong foundation in Python, SQL, Excel, and Power BI. Skilled in data cleaning, exploratory data analysis (EDA), data visualization, and dashboard development. Seeking a Data Analyst opportunity to apply analytical skills, solve business problems, and contribute to data-driven decision-making.
@@ -455,46 +463,45 @@ TECHNICAL SKILLS
 • Programming Languages: Python, SQL
 • Python Libraries: Pandas, NumPy, Matplotlib, Seaborn
 • Data Analysis: Exploratory Data Analysis (EDA), Data Cleaning, Data Wrangling, Statistical Analysis
-• Data Visualization & BI: Power BI (Dashboards, DAX: CALCULATE, SUMX, RANKX), MS Excel (Pivot Tables, VLOOKUP, INDEX-MATCH)
-• Database Management: MySQL, PostgreSQL (Joins, Subqueries, Aggregate Functions, Window Functions), Data Modeling, ETL Basics
+• Data Visualization & BI Tools: Power BI (Dashboards, DAX basics: CALCULATE, SUMX, RANKX), Microsoft Excel (Pivot Tables, VLOOKUP, INDEX-MATCH, Charts)
+• Database Management: MySQL (Joins, Subqueries, Aggregate Functions, Window Functions), Data Modeling, ETL Basics
 • Business Analytics: KPI Analysis, Business Intelligence, Dashboarding, Statistical Analysis, Data Interpretation
 • Tools & Technologies: Jupyter Notebook, Excel, Power BI, Git/GitHub
 • Core Strengths: Problem Solving, Analytical Thinking, Communication, Team Collaboration
 
 EXPERIENCE
-Data Analyst Intern | Alfido Tech (Remote)
-Aug 2026 – Oct 2026
+Data Analyst Intern | Alfido Tech (Remote) Aug 2026 – Oct 2026
 • Cleaned and preprocessed 5+ raw datasets (50,000+ rows total) using Python (Pandas, NumPy), fixing missing values, duplicates, and outliers to improve data quality by an estimated 30%.
 • Performed feature engineering and exploratory data analysis (EDA) across 5 business datasets to identify KPIs, trends, and actionable insights, presented to a 4-person project team.
 • Built 10+ visualizations and summary reports using Matplotlib and Seaborn, translating raw data into clear, decision-ready insights for stakeholders.
 • Automated repetitive data-cleaning steps with reusable Python functions, cutting manual processing time by roughly 40%.
 
 PROJECTS
-Customer Behavior & RFM Segmentation Analysis (End-to-End) | Python, Pandas, NumPy, Matplotlib, Seaborn, Power BI
+Customer Behavior & RFM Segmentation Analysis | Python, Pandas, NumPy, Matplotlib, Seaborn
 • Cleaned and analyzed 10,000+ customer transaction records, engineering RFM (Recency, Frequency, Monetary) features to segment customers into 5 value tiers.
 • Identified high-value and at-risk segments (~20% of customers driving 60%+ of revenue), surfacing retention opportunities for targeted marketing.
-• Built an interactive Power BI dashboard to visualize customer segments and RFM scores, enabling stakeholders to track retention and revenue trends at a glance.
 
-Sales Performance Analysis (End-to-End) | Python, SQL, Pandas, Matplotlib, Seaborn, Power BI
-• Wrote complex SQL queries (joins, aggregations, window functions) to extract and summarize sales, revenue, and profit across regions and categories using the Superstore dataset (9,800+ records).
+Sales Performance Analysis | Python, SQL, Pandas, Matplotlib, Seaborn, Power BI
+• Wrote SQL queries (joins, aggregations, window functions) to extract and summarize sales, revenue, and profit across regions and categories using the Superstore dataset (9,800+ records).
 • Built an interactive Power BI dashboard (5+ visuals) highlighting top products and seasonal trends, surfacing 3+ actionable improvement areas.
 
-Website Traffic Analysis (End-to-End) | Python, Pandas, NumPy, Matplotlib, Seaborn
+Website Traffic Analysis | Python, Pandas, NumPy, Matplotlib, Seaborn
 • Cleaned and analyzed website traffic data spanning thousands of sessions, covering users, bounce rate, and average session duration.
 • Identified top 5 landing/exit pages and referral sources, recommending changes projected to improve conversion and engagement.
 
 EDUCATION
-B.Tech, Computer Science (AI & DS) | IIMT Engineering College (AKTU) — CGPA: 7.2 2023 – 2027
-Class XII (CBSE) | Paramount Academy — Percentage: 67.6% 2023
-Class X (CBSE) | Paramount Academy — Percentage: 65.4% 2021
+B.Tech, Computer Science (AI & DS) | IIMT Engineering College (AKTU) 2023 – 2027
+CGPA: 7.2
+XII (CBSE) | Paramount Academy 2023
+Percentage: 67.6%
+X (CBSE) | Paramount Academy 2021
+Percentage: 65.4%
 
 ACHIEVEMENTS & CERTIFICATIONS
-• Google Data Analytics Professional Certificate – Google & Coursera (ID: EP3O21XSWB7Z, Jun 2026).
-• AI/ML Launchpad Bootcamp – Physics Wallah (PW) & NSDC (Cert: f88d59a0-c12b-474b-b0e7-092097a0fbd8, Jun 2026).
-• Power BI Micro Course – Skill Course (ID: SC-B22A7DDD69, ISO 9001:2015, Completed: 18/12/2025).
-• SQL (Basic) Skill Certification – HackerRank (Earned: 07 Mar 2026).
-• Python for Data Science – Infosys Springboard (Issued: April 27, 2025, verify.onwingspan.com).
-• Advance Internet of Things (IoT) – IIMT College of Engineering & Technoledge (Cert: T/IOT/712613/25).
-• Solved 100+ SQL queries and challenges on LeetCode & HackerRank, strengthening query optimization.
+• Completed the Google Data Analytics Professional Certificate (Coursera), with hands-on projects in EDA, data cleaning, and visualization.
+• Solved 100+ SQL problems on LeetCode, strengthening query writing and analytical thinking.
+• Earned SQL certification from HackerRank, validating database and query skills.
+• Built interactive dashboards in Power BI through a hands-on micro-course.
+• Completed Python for Data Science (Infosys Springboard), applying Pandas and NumPy to real datasets.
 `;
 }

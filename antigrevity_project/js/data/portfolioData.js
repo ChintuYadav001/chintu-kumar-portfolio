@@ -7,10 +7,10 @@
 export const portfolioData = {
   personalInfo: {
     name: "Chintu Kumar",
-    title: "Data Analyst | Python | SQL | Power BI | Excel",
+    title: "Aspiring Data Analyst | Python | SQL | Power BI",
     badge: "Available for Data Analyst Roles",
     typewriterRoles: [
-      "Data Analyst",
+      "Aspiring Data Analyst",
       "Python & SQL Specialist",
       "Power BI Dashboard Designer",
       "EDA & Business Intelligence"
@@ -42,7 +42,7 @@ export const portfolioData = {
   },
 
   stats: [
-    { label: "SQL Queries Solved", value: 100, suffix: "+" },
+    { label: "SQL Problems Solved", value: 100, suffix: "+" },
     { label: "Records Analyzed", value: 10000, suffix: "+" },
     { label: "Analytics Projects", value: 3, suffix: " End-to-End" },
     { label: "Raw Rows Preprocessed", value: 50000, suffix: "+" }
