@@ -134,6 +134,97 @@
 }
 
 /* ==========================================================================
+   AUTHENTIC ORIGINAL PDF RESUME PAPER CARD & EMBED
+   ========================================================================== */
+.original-resume-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.original-pdf-paper-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  max-width: 820px;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transition: box-shadow var(--transition-normal);
+}
+
+.original-pdf-paper-card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+.original-pdf-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto;
+}
+
+/* Clickable contact link hotspots overlayed on the authentic document */
+.pdf-hotspot {
+  position: absolute;
+  top: 6.6%;
+  height: 2.2%;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), outline var(--transition-fast);
+  z-index: 10;
+}
+
+.pdf-hotspot:hover {
+  background-color: rgba(2, 132, 199, 0.18);
+  outline: 1.5px solid rgba(2, 132, 199, 0.6);
+}
+
+.hotspot-email {
+  left: 12.0%;
+  width: 19.5%;
+}
+
+.hotspot-phone {
+  left: 32.2%;
+  width: 11.2%;
+}
+
+.hotspot-linkedin {
+  left: 44.0%;
+  width: 25.5%;
+}
+
+.hotspot-github {
+  left: 70.3%;
+  width: 17.6%;
+}
+
+/* Native PDF Iframe Embed Card */
+.original-pdf-embed-card {
+  width: 100%;
+  max-width: 880px;
+  height: 85vh;
+  min-height: 600px;
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.original-pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
    AUTHENTIC COMPACT 1-PAGE ATS RESUME SHEET
    ========================================================================== */
 .resume-paper-wrapper {

@@ -184,21 +184,51 @@ export function initResume(portfolioData) {
 
   function fitResumeToOnePage() {
     if (!modalContentWrap || !modalBackdrop) return;
-    const docEl = document.getElementById('resume-document');
-    if (!docEl) return;
-    const docHeight = docEl.offsetHeight || 980;
+    const paperEl = document.getElementById('original-pdf-paper-card') || document.getElementById('resume-document');
+    if (!paperEl) return;
+    const docHeight = paperEl.offsetHeight || 1050;
     const availableHeight = window.innerHeight - 110;
     if (availableHeight > 250) {
-      currentZoom = Math.min(1, Math.max(0.4, +(availableHeight / docHeight).toFixed(2)));
+      currentZoom = Math.min(1, Math.max(0.35, +(availableHeight / docHeight).toFixed(2)));
       applyZoom();
       modalBackdrop.scrollTop = 0;
       showToast(`Fit 1-Page View (${Math.round(currentZoom * 100)}%)`, 'info');
     }
   }
 
+  // Toggle between Authentic Paper View and Native PDF Embed
+  const toggleViewBtn = document.getElementById('resume-toggle-view-btn');
+  const toggleViewText = document.getElementById('resume-toggle-view-text');
+  let isNativePdfMode = false;
+
+  if (toggleViewBtn) {
+    toggleViewBtn.addEventListener('click', () => {
+      isNativePdfMode = !isNativePdfMode;
+      const paperCard = document.getElementById('original-pdf-paper-card');
+      const embedCard = document.getElementById('original-pdf-embed-card');
+
+      if (isNativePdfMode) {
+        if (paperCard) paperCard.style.display = 'none';
+        if (embedCard) embedCard.style.display = 'block';
+        if (toggleViewText) toggleViewText.textContent = 'Paper View';
+        showToast('Switched to Native PDF Embed View', 'info');
+      } else {
+        if (embedCard) embedCard.style.display = 'none';
+        if (paperCard) paperCard.style.display = 'block';
+        if (toggleViewText) toggleViewText.textContent = 'PDF Embed';
+        showToast('Switched to Authentic Paper View', 'info');
+      }
+    });
+  }
+
   if (modalPrintBtn) {
     modalPrintBtn.addEventListener('click', () => {
-      window.print();
+      const printWin = window.open('assets/Chintu_Kumar_Data_Analyst_Resume.pdf', '_blank');
+      if (printWin) {
+        printWin.focus();
+      } else {
+        window.print();
+      }
     });
   }
 
@@ -236,7 +266,7 @@ export function initResume(portfolioData) {
 }
 
 /**
- * Generates the authentic single-page ATS-compliant resume document HTML
+ * Generates the authentic original PDF resume document view
  */
 function generateResumeHTML(data) {
   const { personalInfo } = data;
@@ -246,200 +276,33 @@ function generateResumeHTML(data) {
   const cleanPhone = phone.replace(/[^0-9+]/g, '');
 
   return `
-    <article class="resume-paper" id="resume-document">
-      <!-- Document Header -->
-      <header class="doc-header">
-        <h1 class="doc-name">CHINTU KUMAR</h1>
-        <div class="doc-subhead">Aspiring Data Analyst | Python | SQL | Power BI</div>
-        <div class="doc-contact-row">
-          <a href="mailto:${resumeEmail}" class="doc-copy-trigger" data-copy-val="${resumeEmail}" title="Copy email">${resumeEmail}</a>
-          <span class="doc-sep">|</span>
-          <a href="tel:${cleanPhone}" class="doc-copy-trigger" data-copy-val="${phone}" title="Copy phone">${phone}</a>
-          <span class="doc-sep">|</span>
-          <a href="${resumeLinkedin}" target="_blank" rel="noopener noreferrer" title="View LinkedIn Profile">${getIcon('external')} linkedin.com/in/chintu-kumar-767909190</a>
-          <span class="doc-sep">|</span>
-          <a href="https://github.com/ChintuYadav001" target="_blank" rel="noopener noreferrer" title="View GitHub Profile">${getIcon('external')} github.com/ChintuYadav001</a>
-        </div>
-        <div class="doc-metrics-bar">
-          <span>100+ SQL Problems Solved</span>
-          <span class="doc-sep">•</span>
-          <span>10,000+ Records Analyzed</span>
-          <span class="doc-sep">•</span>
-          <span>3 End-to-End Analytics Projects</span>
-        </div>
-      </header>
+    <div class="original-resume-container" id="resume-document">
+      <!-- High-Resolution Authentic Original Paper Document (Default, 100% responsive on all mobile/desktop devices) -->
+      <div class="original-pdf-paper-card" id="original-pdf-paper-card">
+        <img 
+          src="assets/Chintu_Kumar_Data_Analyst_Resume_Page1.png" 
+          alt="Chintu Kumar - Aspiring Data Analyst Resume (Original PDF)" 
+          class="original-pdf-img" 
+          id="original-pdf-img"
+          loading="eager"
+        />
+        <!-- Direct Clickable Hotspots mapped directly over header links -->
+        <a href="mailto:${resumeEmail}" class="pdf-hotspot hotspot-email" title="Email: ${resumeEmail}" aria-label="Email ${resumeEmail}"></a>
+        <a href="tel:${cleanPhone}" class="pdf-hotspot hotspot-phone" title="Phone: ${phone}" aria-label="Call ${phone}"></a>
+        <a href="${resumeLinkedin}" target="_blank" rel="noopener noreferrer" class="pdf-hotspot hotspot-linkedin" title="LinkedIn: linkedin.com/in/chintu-kumar-767909190" aria-label="LinkedIn Profile"></a>
+        <a href="https://github.com/ChintuYadav001" target="_blank" rel="noopener noreferrer" class="pdf-hotspot hotspot-github" title="GitHub: github.com/ChintuYadav001" aria-label="GitHub Profile"></a>
+      </div>
 
-      <!-- Career Objective -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('fileText')} CAREER OBJECTIVE</h2>
-        <p class="doc-objective-text">B.Tech Computer Science (AI &amp; DS) student with a strong foundation in Python, SQL, Excel, and Power BI. Skilled in data cleaning, exploratory data analysis (EDA), data visualization, and dashboard development. Seeking a Data Analyst opportunity to apply analytical skills, solve business problems, and contribute to data-driven decision-making.</p>
-      </section>
-
-      <!-- Technical Skills -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('code')} TECHNICAL SKILLS</h2>
-        <ul class="doc-skills-list">
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Programming Languages:</span>
-            <span class="doc-skill-values">Python, SQL</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Python Libraries:</span>
-            <span class="doc-skill-values">Pandas, NumPy, Matplotlib, Seaborn</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Data Analysis:</span>
-            <span class="doc-skill-values">Exploratory Data Analysis (EDA), Data Cleaning, Data Wrangling, Statistical Analysis</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Data Visualization &amp; BI Tools:</span>
-            <span class="doc-skill-values">Power BI (Dashboards, DAX basics: CALCULATE, SUMX, RANKX), Microsoft Excel (Pivot Tables, VLOOKUP, INDEX-MATCH, Charts)</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Database Management:</span>
-            <span class="doc-skill-values">MySQL (Joins, Subqueries, Aggregate Functions, Window Functions), Data Modeling, ETL Basics</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Business Analytics:</span>
-            <span class="doc-skill-values">KPI Analysis, Business Intelligence, Dashboarding, Statistical Analysis, Data Interpretation</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Tools &amp; Technologies:</span>
-            <span class="doc-skill-values">Jupyter Notebook, Excel, Power BI, Git/GitHub</span>
-          </li>
-          <li class="doc-skills-row">
-            <span class="doc-skill-label">• Core Strengths:</span>
-            <span class="doc-skill-values">Problem Solving, Analytical Thinking, Communication, Team Collaboration</span>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Professional Experience -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('layers')} EXPERIENCE</h2>
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <span class="doc-item-role">Data Analyst Intern</span>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-org">Alfido Tech (Remote)</span>
-            </div>
-            <span class="doc-item-date">Aug 2026 – Oct 2026</span>
-          </div>
-          <ul class="doc-bullets">
-            <li class="doc-bullet">• Cleaned and preprocessed <strong>5+ raw datasets (50,000+ rows total)</strong> using Python (Pandas, NumPy), fixing missing values, duplicates, and outliers to improve data quality by an estimated 30%.</li>
-            <li class="doc-bullet">• Performed feature engineering and exploratory data analysis (EDA) across 5 business datasets to identify KPIs, trends, and actionable insights, presented to a 4-person project team.</li>
-            <li class="doc-bullet">• Built <strong>10+ visualizations and summary reports</strong> using Matplotlib and Seaborn, translating raw data into clear, decision-ready insights for stakeholders.</li>
-            <li class="doc-bullet">• Automated repetitive data-cleaning steps with reusable Python functions, cutting manual processing time by roughly <strong>40%</strong>.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('chart')} PROJECTS</h2>
-        
-        <!-- Project 1 -->
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-rfm">Customer Behavior &amp; RFM Segmentation Analysis</a>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-tech">Python, Pandas, NumPy, Matplotlib, Seaborn</span>
-            </div>
-          </div>
-          <ul class="doc-bullets">
-            <li class="doc-bullet">• Cleaned and analyzed <strong>10,000+ customer transaction records</strong>, engineering RFM (Recency, Frequency, Monetary) features to segment customers into 5 value tiers.</li>
-            <li class="doc-bullet">• Identified high-value and at-risk segments (<strong>~20% of customers driving 60%+ of revenue</strong>), surfacing retention opportunities for targeted marketing.</li>
-          </ul>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-sales">Sales Performance Analysis</a>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-tech">Python, SQL, Pandas, Matplotlib, Seaborn, Power BI</span>
-            </div>
-          </div>
-          <ul class="doc-bullets">
-            <li class="doc-bullet">• Wrote SQL queries (joins, aggregations, window functions) to extract and summarize sales, revenue, and profit across regions and categories using the <strong>Superstore dataset (9,800+ records)</strong>.</li>
-            <li class="doc-bullet">• Built an interactive <strong>Power BI dashboard (5+ visuals)</strong> highlighting top products and seasonal trends, surfacing 3+ actionable improvement areas.</li>
-          </ul>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <a href="#projects" class="doc-item-role doc-proj-trigger" data-proj-id="project-traffic">Website Traffic Analysis</a>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-tech">Python, Pandas, NumPy, Matplotlib, Seaborn</span>
-            </div>
-          </div>
-          <ul class="doc-bullets">
-            <li class="doc-bullet">• Cleaned and analyzed website traffic data spanning thousands of sessions, covering users, bounce rate, and average session duration.</li>
-            <li class="doc-bullet">• Identified top 5 landing/exit pages and referral sources, recommending changes projected to improve conversion and engagement.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Education -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('server')} EDUCATION</h2>
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <span class="doc-item-role">B.Tech, Computer Science (AI &amp; DS)</span>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-org">IIMT Engineering College (AKTU)</span>
-              <span class="doc-sep">•</span>
-              <span class="doc-item-tech">CGPA: <strong>7.2</strong></span>
-            </div>
-            <span class="doc-item-date">2023 – 2027</span>
-          </div>
-        </div>
-
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <span class="doc-item-role">XII (CBSE)</span>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-org">Paramount Academy</span>
-              <span class="doc-sep">•</span>
-              <span class="doc-item-tech">Percentage: <strong>67.6%</strong></span>
-            </div>
-            <span class="doc-item-date">2023</span>
-          </div>
-        </div>
-
-        <div class="doc-item">
-          <div class="doc-item-header">
-            <div class="doc-item-title-wrap">
-              <span class="doc-item-role">X (CBSE)</span>
-              <span class="doc-sep">|</span>
-              <span class="doc-item-org">Paramount Academy</span>
-              <span class="doc-sep">•</span>
-              <span class="doc-item-tech">Percentage: <strong>65.4%</strong></span>
-            </div>
-            <span class="doc-item-date">2021</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Achievements & Certifications -->
-      <section class="doc-section">
-        <h2 class="doc-section-title">${getIcon('award')} ACHIEVEMENTS &amp; CERTIFICATIONS</h2>
-        <ul class="doc-bullets">
-          <li class="doc-bullet">• Completed the <a href="https://coursera.org/verify/professional-cert/EP3O21XSWB7Z" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-google-data-analytics" title="Preview Certificate">${getIcon('external')} <strong>Google Data Analytics Professional Certificate</strong></a> (Coursera), with hands-on projects in EDA, data cleaning, and visualization.</li>
-          <li class="doc-bullet">• Solved <strong>100+ SQL problems on LeetCode</strong>, strengthening query writing and analytical thinking.</li>
-          <li class="doc-bullet">• Earned <a href="https://www.hackerrank.com/certificates/967bfb00fd4b" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-hackerrank-sql" title="Preview Certificate">${getIcon('external')} <strong>SQL certification from HackerRank</strong></a>, validating database and query skills.</li>
-          <li class="doc-bullet">• Built interactive dashboards in Power BI through a hands-on micro-course (<a href="https://www.skillcourse.in" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-skillcourse-powerbi" title="Preview Certificate">${getIcon('external')} <strong>Power BI Micro Course</strong></a>).</li>
-          <li class="doc-bullet">• Completed <a href="https://verify.onwingspan.com" target="_blank" rel="noopener noreferrer" class="doc-cert-link doc-cert-trigger" data-cert-id="cert-infosys-datascience" title="Preview Certificate">${getIcon('external')} <strong>Python for Data Science</strong></a> (Infosys Springboard), applying Pandas and NumPy to real datasets.</li>
-        </ul>
-      </section>
-    </article>
+      <!-- Native PDF Iframe Embed Card (Active when toggled on desktop) -->
+      <div class="original-pdf-embed-card" id="original-pdf-embed-card" style="display: none;">
+        <iframe 
+          id="original-pdf-iframe" 
+          src="assets/Chintu_Kumar_Data_Analyst_Resume.pdf#toolbar=1&view=FitH" 
+          title="Chintu Kumar Original PDF Resume" 
+          class="original-pdf-iframe"
+        ></iframe>
+      </div>
+    </div>
   `;
 }
 
