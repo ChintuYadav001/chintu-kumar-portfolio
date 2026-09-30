@@ -22,7 +22,82 @@
 .about .section-header {
   max-width: 760px;
   margin-inline: auto;
-  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+/* Centered Round Profile Avatar in About Section Middle */
+.about-center-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.about-avatar-ring {
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  padding: 3.5px;
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  box-shadow: 
+    0 0 24px -3px rgba(56, 189, 248, 0.45),
+    0 0 45px -6px rgba(129, 140, 248, 0.35);
+  position: relative;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  animation: avatarGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlowPulse {
+  0% {
+    box-shadow: 
+      0 0 18px -4px rgba(56, 189, 248, 0.4),
+      0 0 32px -6px rgba(129, 140, 248, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 0 28px -2px rgba(56, 189, 248, 0.6),
+      0 0 50px -4px rgba(129, 140, 248, 0.45);
+  }
+}
+
+.about-avatar-ring:hover {
+  transform: scale(1.03);
+  box-shadow: 
+    0 0 35px 0 rgba(56, 189, 248, 0.7),
+    0 0 60px 0 rgba(129, 140, 248, 0.55);
+}
+
+.about-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  background: #0f172a;
+}
+
+.about-avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding: 0.35rem 1rem;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.about-avatar-badge strong {
+  color: var(--text-primary);
 }
 
 /* 2-Column Responsive Layout */
