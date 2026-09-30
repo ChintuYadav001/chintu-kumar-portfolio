@@ -5,8 +5,8 @@
    ========================================================================== */
 
 export function initHero3DScene() {
-  const container = document.getElementById('hero-3d-stage');
-  const canvas = document.getElementById('hero-3d-canvas');
+  const container = document.getElementById('skills-3d-stage') || document.getElementById('hero-3d-stage');
+  const canvas = document.getElementById('skills-3d-canvas') || document.getElementById('hero-3d-canvas');
   if (!container || !canvas || typeof THREE === 'undefined') return;
 
   const width = container.clientWidth || 450;

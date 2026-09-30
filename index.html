@@ -124,69 +124,92 @@
             </div>
           </div>
 
-          <!-- Right: Interactive 3D WebGL Cyber Data Core Stage -->
+          <!-- Right: Data Analytics Command Center Card (Clean, Low-key, Professional) -->
           <div class="hero-visual reveal reveal-delay-2">
-            <div class="floating-3d-tag">
-              <span class="pulse-dot" style="background-color: var(--accent-cyan);"></span>
-              <span>Interactive 3D WebGL</span>
+            <!-- Floating Tech Badges -->
+            <div class="floating-pill pill-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span>DAX &amp; Measures</span>
+            </div>
+            <div class="floating-pill pill-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>RFM Segmentation</span>
             </div>
 
-            <div class="hero-3d-container glow-border-3d" id="hero-3d-stage">
-              <!-- 3D Header HUD Bar -->
-              <div class="hero-3d-hud-header">
-                <div class="hero-3d-status">
-                  <span class="pulse-dot"></span>
-                  <span>3D Cyber Data Core</span>
+            <div class="hero-analytics-card glow-border-3d" data-tilt data-tilt-max="6" data-tilt-scale="1.01">
+              <div class="analytics-card-header">
+                <div class="analytics-status-pill">
+                  <span class="pulse-dot" style="background-color: var(--accent-emerald);"></span>
+                  <span>Pipeline Active</span>
                 </div>
-                <div class="hero-3d-tag">Python • SQL • Power BI</div>
+                <div class="analytics-query-tag">SQL &bull; EDA_PIPELINE.py</div>
               </div>
 
-              <!-- 3D Canvas Viewport -->
-              <div class="hero-3d-canvas-wrapper" title="Click and drag to rotate the 3D core in real-time">
-                <canvas id="hero-3d-canvas"></canvas>
-                <div class="hero-3d-hint">Drag to rotate in 3D</div>
+              <div class="analytics-card-body">
+                <!-- Mini KPI telemetry row -->
+                <div class="analytics-kpi-row">
+                  <div class="analytics-kpi-item">
+                    <div class="kpi-item-val">100+</div>
+                    <div class="kpi-item-lbl">SQL Solved</div>
+                  </div>
+                  <div class="analytics-kpi-item">
+                    <div class="kpi-item-val">10K+</div>
+                    <div class="kpi-item-lbl">Rows Tested</div>
+                  </div>
+                  <div class="analytics-kpi-item">
+                    <div class="kpi-item-val">50K+</div>
+                    <div class="kpi-item-lbl">Data Cleaned</div>
+                  </div>
+                </div>
 
-                <!-- 3D Interactive Controls -->
-                <div class="hero-3d-controls">
-                  <button id="btn-3d-rotate" class="hero-3d-btn active" title="Toggle Auto-Spin">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                    <span>Auto-Spin: ON</span>
-                  </button>
-                  <button id="btn-3d-wireframe" class="hero-3d-btn" title="Toggle Wireframe Mode">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                    <span>Wireframe</span>
-                  </button>
-                  <button id="btn-3d-pulse" class="hero-3d-btn" title="Send Data Energy Pulse">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    <span>Pulse</span>
-                  </button>
-                  <button id="btn-3d-reset" class="hero-3d-btn" title="Reset 3D Orientation">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                    <span>Reset</span>
-                  </button>
+                <!-- SVG Sparkline Chart -->
+                <div class="analytics-chart-container">
+                  <div class="chart-header-row">
+                    <div class="chart-legend">
+                      <span class="chart-legend-dot"></span>
+                      <span>EDA Trend Analysis</span>
+                    </div>
+                    <span class="chart-benchmark">+34.8% Efficiency</span>
+                  </div>
+                  <svg class="analytics-sparkline-svg" viewBox="0 0 360 80" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="heroChartGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M 0,65 Q 45,55 90,40 T 180,48 T 270,22 T 360,12 L 360,80 L 0,80 Z" fill="url(#heroChartGrad)"/>
+                    <path d="M 0,65 Q 45,55 90,40 T 180,48 T 270,22 T 360,12" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="90" cy="40" r="3.5" fill="#38bdf8"/>
+                    <circle cx="180" cy="48" r="3.5" fill="#818cf8"/>
+                    <circle cx="270" cy="22" r="3.5" fill="#38bdf8"/>
+                    <circle cx="360" cy="12" r="4.5" fill="#34d399"/>
+                  </svg>
+                </div>
+
+                <!-- ETL Pipeline Stages -->
+                <div class="analytics-pipeline-row">
+                  <div class="pipeline-step active">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>Extract</span>
+                  </div>
+                  <span class="pipeline-arrow">&rarr;</span>
+                  <div class="pipeline-step active">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>Clean</span>
+                  </div>
+                  <span class="pipeline-arrow">&rarr;</span>
+                  <div class="pipeline-step active">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>Transform</span>
+                  </div>
+                  <span class="pipeline-arrow">&rarr;</span>
+                  <div class="pipeline-step active">
+                    <span class="pulse-dot" style="width:6px;height:6px;background:#34d399;"></span>
+                    <span>Visualize</span>
+                  </div>
                 </div>
               </div>
-
-              <!-- Live Telemetry KPI Metrics -->
-              <div class="hero-3d-kpis">
-                <div class="hero-3d-kpi-item">
-                  <div class="hero-3d-kpi-val">100+</div>
-                  <div class="hero-3d-kpi-lbl">SQL Queries</div>
-                </div>
-                <div class="hero-3d-kpi-item">
-                  <div class="hero-3d-kpi-val">10K+</div>
-                  <div class="hero-3d-kpi-lbl">Rows Analyzed</div>
-                </div>
-                <div class="hero-3d-kpi-item">
-                  <div class="hero-3d-kpi-val">50K+</div>
-                  <div class="hero-3d-kpi-lbl">Raw Data Cleaned</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-sub-kpi-badge floating-3d-badge">
-              <span class="pulse-dot" style="background-color: var(--accent-violet);"></span>
-              <span>EDA • RFM • DAX • Python Pipelines</span>
             </div>
           </div>
         </div>
@@ -211,14 +234,48 @@
         </div>
 
         <div class="about-grid">
-          <!-- Left Column: Biography & Fast Facts -->
-          <div class="about-bio-col reveal">
-            <div class="about-bio-card glow-border-3d" data-tilt data-tilt-max="5" data-tilt-scale="1.01">
-              <h3 class="about-bio-heading">Analytical Thinker &amp; Problem Solver</h3>
+          <!-- Left Column: Profile Card with Photo, Glowing Frame, Floating Chips & Clean Stats Row -->
+          <div class="about-profile-col reveal">
+            <div class="about-profile-card glow-border-3d" data-tilt data-tilt-max="4" data-tilt-scale="1.01">
               
-              <p id="about-bio" class="about-bio-text">
-                B.Tech Computer Science (AI &amp; Data Science) undergraduate at <strong>IIMT Engineering College</strong> with hands-on internship experience at <strong>Alfido Tech</strong>. Specialized in Python, SQL pipeline construction, exploratory data analysis (EDA), and interactive Power BI dashboard development. Passionate about automating data workflows, engineering RFM customer models, and translating complex datasets into clear, actionable business strategies.
-              </p>
+              <!-- Circular Photo Frame with Glowing Border & Floating Chips -->
+              <div class="about-photo-wrapper">
+                <div class="about-photo-frame">
+                  <img src="assets/images/chintu_profile_square.jpg" alt="Chintu Kumar - Aspiring Data Analyst" class="about-photo-img" loading="eager" />
+                </div>
+
+                <!-- 3 Floating Chips around the photo -->
+                <div class="floating-chip chip-python" title="Python Data Analysis">
+                  <span class="chip-dot chip-dot-python"></span>
+                  <span class="chip-text">Python</span>
+                </div>
+                <div class="floating-chip chip-powerbi" title="Power BI Dashboards">
+                  <span class="chip-dot chip-dot-powerbi"></span>
+                  <span class="chip-text">Power BI</span>
+                </div>
+                <div class="floating-chip chip-sql" title="SQL Database Querying">
+                  <span class="chip-dot chip-dot-sql"></span>
+                  <span class="chip-text">SQL</span>
+                </div>
+              </div>
+
+              <!-- Clean Stats Row Directly Under Photo -->
+              <div class="about-photo-stats-row">
+                <div class="photo-stat-item">
+                  <div class="photo-stat-val">100+</div>
+                  <div class="photo-stat-lbl">SQL Queries</div>
+                </div>
+                <div class="photo-stat-divider" aria-hidden="true"></div>
+                <div class="photo-stat-item">
+                  <div class="photo-stat-val">10K+</div>
+                  <div class="photo-stat-lbl">Rows</div>
+                </div>
+                <div class="photo-stat-divider" aria-hidden="true"></div>
+                <div class="photo-stat-item">
+                  <div class="photo-stat-val">50K+</div>
+                  <div class="photo-stat-lbl">Data Cleaned</div>
+                </div>
+              </div>
 
               <!-- Quick Info Badges Grid -->
               <div class="about-facts-grid">
@@ -263,58 +320,67 @@
                   <span>Download PDF</span>
                 </a>
               </div>
+
             </div>
           </div>
 
           <!-- Right Column: 4 Analytical Focus Pillars -->
-          <div class="about-pillars-col reveal reveal-delay-2">
-            <div class="about-pillars-grid">
-              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <div class="pillar-icon-wrap" style="color: var(--accent-cyan);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <div class="about-bio-col reveal reveal-delay-2">
+            <div class="about-bio-card glow-border-3d" data-tilt data-tilt-max="4" data-tilt-scale="1.01">
+              <h3 class="about-bio-heading">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Analytical Thinker &amp; Problem Solver
+              </h3>
+              
+              <p id="about-bio" class="about-bio-text">
+                B.Tech Computer Science (AI &amp; Data Science) undergraduate at <strong>IIMT Engineering College</strong> with hands-on internship experience at <strong>Alfido Tech</strong>. Specialized in Python, SQL pipeline construction, exploratory data analysis (EDA), and interactive Power BI dashboard development. Passionate about automating data workflows, engineering RFM customer models, and translating complex datasets into clear, actionable business strategies.
+              </p>
+
+              <!-- 4 Analytical Focus Pillars Grid -->
+              <div class="about-pillars-grid">
+                <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="6" data-tilt-scale="1.02">
+                  <div class="pillar-icon-wrap" style="color: var(--accent-cyan);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="pillar-title">Data Cleaning &amp; Wrangling</h4>
+                    <p class="pillar-desc">Cleaning 50,000+ raw rows using Pandas &amp; NumPy, resolving null values, outliers, and automating ETL tasks.</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 class="pillar-title">Data Cleaning &amp; Wrangling</h4>
-                  <p class="pillar-desc">Cleaning 50,000+ raw rows using Pandas &amp; NumPy, resolving null values, outliers, and automating ETL tasks.</p>
+
+                <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="6" data-tilt-scale="1.02">
+                  <div class="pillar-icon-wrap" style="color: var(--accent-emerald);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="pillar-title">Exploratory Analysis (EDA)</h4>
+                    <p class="pillar-desc">Engineering RFM segmentation, customer lifetime metrics, and detecting high-value business trends.</p>
+                  </div>
+                </div>
+
+                <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="6" data-tilt-scale="1.02">
+                  <div class="pillar-icon-wrap" style="color: var(--accent-violet);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="pillar-title">Power BI &amp; DAX Dashboards</h4>
+                    <p class="pillar-desc">Architecting interactive multi-page dashboards, KPI scorecards, and DAX calculations (CALCULATE, SUMX, RANKX).</p>
+                  </div>
+                </div>
+
+                <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="6" data-tilt-scale="1.02">
+                  <div class="pillar-icon-wrap" style="color: #f59e0b;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="pillar-title">SQL Querying &amp; Optimization</h4>
+                    <p class="pillar-desc">Writing complex SQL queries with CTEs, window functions, and multi-table joins (100+ complex SQL queries solved).</p>
+                  </div>
                 </div>
               </div>
 
-              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <div class="pillar-icon-wrap" style="color: var(--accent-emerald);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                </div>
-                <div>
-                  <h4 class="pillar-title">Exploratory Analysis (EDA)</h4>
-                  <p class="pillar-desc">Engineering RFM segmentation, customer lifetime metrics, and detecting high-value business trends.</p>
-                </div>
-              </div>
-
-              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <div class="pillar-icon-wrap" style="color: var(--accent-violet);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                </div>
-                <div>
-                  <h4 class="pillar-title">Power BI &amp; DAX Dashboards</h4>
-                  <p class="pillar-desc">Architecting interactive multi-page dashboards, KPI scorecards, and DAX calculations (CALCULATE, SUMX, RANKX).</p>
-                </div>
-              </div>
-
-              <div class="pillar-card glow-border-3d" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <div class="pillar-icon-wrap" style="color: #f59e0b;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                </div>
-                <div>
-                  <h4 class="pillar-title">SQL Querying &amp; Optimization</h4>
-                  <p class="pillar-desc">Writing complex SQL queries with CTEs, window functions, and multi-table joins (100+ complex SQL queries solved).</p>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Integrated Key Metrics Strip -->
-        <div id="stats-container" class="about-stats-strip reveal">
-          <!-- Injected by JavaScript statsCounter.js -->
         </div>
       </div>
     </section>
@@ -362,6 +428,64 @@
 
         <div id="skills-grid" class="skills-grid">
           <!-- Injected by JavaScript skills.js -->
+        </div>
+
+        <!-- Interactive 3D WebGL Cyber Data Core Stage in Skills Section -->
+        <div class="skills-3d-showcase reveal" style="margin-top: clamp(2.5rem, 4vw, 3.5rem);">
+          <div class="skills-3d-wrapper">
+            <div class="hero-3d-container glow-border-3d" id="skills-3d-stage">
+              <!-- 3D Header HUD Bar -->
+              <div class="hero-3d-hud-header">
+                <div class="hero-3d-status">
+                  <span class="pulse-dot"></span>
+                  <span>Interactive 3D Tech Core</span>
+                </div>
+                <div class="hero-3d-tag">Python &bull; SQL &bull; Power BI Stack</div>
+              </div>
+
+              <!-- 3D Canvas Viewport -->
+              <div class="hero-3d-canvas-wrapper" title="Click and drag to rotate the 3D core in real-time">
+                <canvas id="skills-3d-canvas"></canvas>
+                <div class="hero-3d-hint">Drag to rotate in 3D</div>
+
+                <!-- 3D Interactive Controls -->
+                <div class="hero-3d-controls">
+                  <button id="btn-3d-rotate" class="hero-3d-btn active" title="Toggle Auto-Spin">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span>Auto-Spin: ON</span>
+                  </button>
+                  <button id="btn-3d-wireframe" class="hero-3d-btn" title="Toggle Wireframe Mode">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <span>Wireframe</span>
+                  </button>
+                  <button id="btn-3d-pulse" class="hero-3d-btn" title="Send Data Energy Pulse">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Pulse</span>
+                  </button>
+                  <button id="btn-3d-reset" class="hero-3d-btn" title="Reset 3D Orientation">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span>Reset</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Live Telemetry KPI Metrics -->
+              <div class="hero-3d-kpis">
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">100+</div>
+                  <div class="hero-3d-kpi-lbl">SQL Queries</div>
+                </div>
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">10K+</div>
+                  <div class="hero-3d-kpi-lbl">Rows Analyzed</div>
+                </div>
+                <div class="hero-3d-kpi-item">
+                  <div class="hero-3d-kpi-val">50K+</div>
+                  <div class="hero-3d-kpi-lbl">Raw Data Cleaned</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
