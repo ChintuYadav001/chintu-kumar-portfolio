@@ -28,8 +28,8 @@
 /* 2-Column Responsive Layout */
 .about-grid {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: clamp(1.75rem, 3vw, 2.75rem);
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.75rem, 3vw, 3rem);
   align-items: stretch;
   width: 100%;
 }
@@ -37,16 +37,16 @@
 @media (max-width: 992px) {
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
 
-/* Left Column: Profile Card */
-.about-profile-col {
+/* Left Column: Biography Card */
+.about-bio-col {
   display: flex;
 }
 
-.about-profile-card {
+.about-bio-card {
   width: 100%;
   background: var(--surface-card);
   border: 1px solid var(--border-subtle);
@@ -54,223 +54,37 @@
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.about-profile-card:hover {
+.about-bio-card:hover {
   border-color: rgba(56, 189, 248, 0.4);
   box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.12);
 }
 
-/* Photo Wrapper & Circular Glowing Frame */
-.about-photo-wrapper {
-  position: relative;
-  width: 210px;
-  height: 210px;
-  margin: 0.25rem auto 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about-photo-frame {
-  width: 185px;
-  height: 185px;
-  border-radius: 50%;
-  padding: 3.5px;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  box-shadow: 
-    0 0 22px -3px rgba(56, 189, 248, 0.45),
-    0 0 40px -6px rgba(129, 140, 248, 0.35);
-  position: relative;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  animation: photoGlowPulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes photoGlowPulse {
-  0% {
-    box-shadow: 
-      0 0 18px -4px rgba(56, 189, 248, 0.4),
-      0 0 32px -6px rgba(129, 140, 248, 0.3);
-  }
-  100% {
-    box-shadow: 
-      0 0 28px -2px rgba(56, 189, 248, 0.6),
-      0 0 48px -4px rgba(129, 140, 248, 0.45);
-  }
-}
-
-.about-photo-frame:hover {
-  transform: scale(1.02);
-  box-shadow: 
-    0 0 32px 0 rgba(56, 189, 248, 0.65),
-    0 0 55px 0 rgba(129, 140, 248, 0.5);
-}
-
-.about-photo-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 15%;
-  display: block;
-  background: #0f172a;
-}
-
-/* Floating Chips Around Photo */
-.floating-chip {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-full);
-  background: rgba(15, 23, 42, 0.88);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.5), 0 0 12px rgba(56, 189, 248, 0.18);
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 600;
+.about-bio-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--text-primary);
-  user-select: none;
-  z-index: 2;
-  will-change: transform;
-}
-
-[data-theme="light"] .floating-chip {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.1), 0 0 12px rgba(56, 189, 248, 0.2);
-}
-
-.chip-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.chip-dot-python {
-  background: #818cf8;
-  box-shadow: 0 0 8px #818cf8;
-}
-
-.chip-dot-powerbi {
-  background: #f59e0b;
-  box-shadow: 0 0 8px #f59e0b;
-}
-
-.chip-dot-sql {
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
-}
-
-/* Positioning and gentle floating CSS animation */
-.chip-python {
-  top: 14px;
-  left: -18px;
-  animation: floatChip1 3.4s ease-in-out infinite alternate;
-}
-
-.chip-powerbi {
-  top: 22px;
-  right: -24px;
-  animation: floatChip2 4.0s ease-in-out infinite alternate;
-  animation-delay: -1.2s;
-}
-
-.chip-sql {
-  bottom: 10px;
-  right: -14px;
-  animation: floatChip3 3.6s ease-in-out infinite alternate;
-  animation-delay: -2.0s;
-}
-
-@keyframes floatChip1 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes floatChip2 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-7px);
-  }
-}
-
-@keyframes floatChip3 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-6px);
-  }
-}
-
-/* Clean Stats Row Placed Directly Under Photo */
-.about-photo-stats-row {
+  margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.75rem 0.85rem;
+  gap: 0.5rem;
+}
+
+.about-bio-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
   margin-bottom: 1.25rem;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);
 }
 
-[data-theme="light"] .about-photo-stats-row {
-  background: rgba(241, 245, 249, 0.7);
-}
-
-.photo-stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex: 1;
-}
-
-.photo-stat-val {
-  font-size: 1.3rem;
-  font-weight: 800;
-  font-family: var(--font-sans);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.photo-stat-lbl {
-  font-size: 0.68rem;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 0.2rem;
-  white-space: nowrap;
-}
-
-.photo-stat-divider {
-  width: 1px;
-  height: 26px;
-  background: var(--border-subtle);
-  flex-shrink: 0;
+.about-bio-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 /* Quick Facts Badges Grid */
@@ -278,8 +92,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  width: 100%;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  margin-top: auto;
 }
 
 @media (max-width: 540px) {
@@ -339,57 +153,14 @@
 .about-actions-row {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  width: 100%;
-  padding-top: 0.25rem;
+  padding-top: 0.5rem;
 }
 
-/* Right Column: Biography & Analytical Pillars Card */
-.about-bio-col {
+/* Right Column: 4 Analytical Focus Pillars */
+.about-pillars-col {
   display: flex;
-}
-
-.about-bio-card {
-  width: 100%;
-  background: var(--surface-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
-}
-
-.about-bio-card:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.12);
-}
-
-.about-bio-heading {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.about-bio-text {
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.about-bio-text strong {
-  color: var(--text-primary);
-  font-weight: 600;
 }
 
 .about-pillars-grid {

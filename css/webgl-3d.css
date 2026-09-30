@@ -56,21 +56,7 @@
   cursor: grabbing;
 }
 
-/* Skills Section 3D Tech Core Showcase */
-.skills-3d-showcase {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.skills-3d-wrapper {
-  width: 100%;
-  max-width: 490px;
-}
-
-#hero-3d-canvas,
-#skills-3d-canvas {
+#hero-3d-canvas {
   width: 100%;
   height: 100%;
   display: block;
